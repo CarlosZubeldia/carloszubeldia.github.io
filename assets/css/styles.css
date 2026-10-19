@@ -7072,13 +7072,18 @@ img[width][height] {
    se veia "movida" porque el recorte caia en la parte equivocada de la foto.
    El bloque movil ya lo compensaba (`.phero .phero__media > img`); escritorio
    no. Aqui se repone el 100 % con un selector que si gana (0,3,1).
-   Solo Ascaso y Altessia, y solo escritorio: es lo que pidio el cliente.
+   Primero se aplico solo a Ascaso y Altessia (lo que pidio el cliente); el
+   19 oct, al ver que Edusport tenia el mismo desfase (196 px a 1920), se
+   anadio tambien. En Edusport el collage es 2,34 de proporcion, asi que
+   `cover` recorta por arriba y por abajo, centrado sobre la pieza central.
    ========================================================================== */
 @media (min-width: 1025px) {
   .project--ascaso .phero .phero__media > img,
   .project--ascaso .phero .phero__media > video,
   .project--altessia .phero .phero__media > img,
-  .project--altessia .phero .phero__media > video {
+  .project--altessia .phero .phero__media > video,
+  .project--edusport .phero .phero__media > img,
+  .project--edusport .phero .phero__media > video {
     height: 100%;
     object-fit: cover;
     object-position: 50% 50%;
