@@ -6783,6 +6783,20 @@ body.is-locked .header--over-media .brand__dot {
   .project--altessia #ux-audit .pcaption {
     margin-top: clamp(1.4rem, 2.4vw, 2.05rem);
   }
+
+  /* La caja menta va al ancho de la BANDA y su contenido respira menos (19 oct,
+     lo pidio el cliente: "hay que ensancharlo mas todo"). Antes, a 390 px: la
+     caja medía 330 dentro de una banda de 370, y el texto arrancaba 62 px
+     adentro (20 del relleno de la seccion + 30 de la caja + 12 del paso).
+     Ahora la caja ocupa la banda entera y el texto empieza a 30.
+     El -20 px es seguro a cualquier ancho: el relleno lateral de la seccion es
+     `clamp(1.25rem, 3.1vw, 2.8rem)`, que nunca baja de 20 px, asi que la caja
+     no puede salirse de su banda. */
+  .project--altessia #ux-audit .pcaption,
+  .project--altessia #ux-audit .pgrid--4 {
+    margin-inline: -20px;
+    padding-inline: 18px;
+  }
 }
 
 /* ----------------------------------------------------------- PAGINA 404 --- */
