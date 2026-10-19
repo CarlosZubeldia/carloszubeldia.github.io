@@ -6538,6 +6538,25 @@ body.is-locked .header--over-media .brand__dot {
     object-fit: contain;
   }
 
+  /* Building trust en movil: el reparto de escritorio (tarjeta 4,7 partes /
+     movil 1) se apila, y ahi la tarjeta se quedaba en 154 px de alto frente a
+     los 724 del movil: desaparecia al lado. Equilibrio nuevo: la tarjeta ocupa
+     TODO el ancho y con su formato natural (1600x864), y el movil baja al 55 %
+     y se centra. 19 oct, pedido por el cliente. */
+  .project--altessia #trust .pshowcase__grid {
+    justify-items: center;
+  }
+
+  .project--altessia #trust .pshowcase__grid > img:first-child {
+    aspect-ratio: auto;
+    width: 100%;
+  }
+
+  .project--altessia #trust .pshowcase__grid > img:last-child {
+    width: 55%;
+    max-width: 16rem;
+  }
+
   .project--altessia #appointments .pshowcase__grid {
     flex-direction: column;
     align-items: center;
