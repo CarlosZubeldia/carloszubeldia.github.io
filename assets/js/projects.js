@@ -1388,13 +1388,13 @@ const PROJECTS = [
             t: "media",
             full: true,
             src: IMG + "edusport-web-mockups.webp",
-            /* En movil, las cuatro piezas sueltas en cascada (el cliente lo
-               pidio asi); en escritorio manda la compuesta. */
+            /* En movil, las piezas sueltas en cascada (el cliente lo pidio
+               asi). Solo las DOS horizontales: las verticales (el recorte de
+               movil de "Area Deportiva" y el de categorias) repetian lo que ya
+               sale en grande justo encima, y el cliente las mando quitar. */
             srcMobile: [
               IMG + "bb5de17b8c2da0a11b7cef043255762a88e8701a.webp",
               IMG + "4c1d7b74d0f3a7e1318294bab0ebda7cba02ed0b.webp",
-              IMG + "6d5a9f0768c993e87736187d9ae54bd87d22b6ab.webp",
-              IMG + "56a0e9e3aabf29ae5996cfb471199f20ada3cdf0.webp",
             ],
           },
           {

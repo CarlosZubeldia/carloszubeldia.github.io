@@ -6933,10 +6933,13 @@ img[width][height] {
     padding: 0;
   }
 
-  /* El texto tiene que CABER dentro de la foto: el hueco de la cabecera fija
-     se queda en lo justo y el texto se pega abajo, sobre la imagen. */
+  /* El texto va CENTRADO en el hueco que deja el titular. En movil el bloque
+     (etiqueta + entradilla) se quedaba pegado ARRIBA, justo debajo de la
+     cabecera flotante; con `margin-block: auto` se centra solo en el espacio
+     libre, y el titular sigue abajo por el `space-between` del marco. */
   .phero__top {
-    padding: calc(var(--header-h) + 0.5rem) 1rem 0;
+    padding: 0 1rem;
+    margin-block: auto;
     max-width: none;
   }
 
