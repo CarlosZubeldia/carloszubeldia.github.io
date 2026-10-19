@@ -6885,3 +6885,174 @@ img[width][height] {
 .project--edusport #website .psection__full > * + * {
   margin-top: clamp(5rem, 11vw, 11rem);
 }
+
+/* ==========================================================================
+   MOVIL: cabeceras de proyecto y anchos de seccion (15 oct)
+   --------------------------------------------------------------------------
+   Dos fallos que solo se ven por debajo de 1.024 px, y que se arreglan AQUI,
+   en un bloque propio y acotado por media query, sin tocar NI UNA regla de
+   escritorio. Todo lo que hay por encima de 1.024 px sigue exactamente igual.
+
+   1. CABECERAS. En el movil el marco medía min(62vh, 620px) = 533 px a 390x844
+      con solo 370 px de ancho, o sea una caja vertical. La imagen de portada,
+      que es apaisada, se recortaba un 57 % (Ascaso), un 40 % (Altessia) y un
+      44 % (Edusport), y como el texto va abajo, el recorte se comia justo la
+      parte de la foto que tiene el contenido: en Ascaso el 80 % del detalle
+      vive entre el 37 % y el 94 % del alto (la mesa y la cafetera), y con el
+      recorte centrado desaparecia. Encima, media cabecera se quedaba en gris
+      liso porque el texto ocupaba mas alto que la foto, y el titular claro
+      caia sobre el gris y no se leia.
+      Arreglo: cabecera mas baja, mas proporcionada, y la foto colocada por su
+      FOCO (no centrada) para que quede lo que importa.
+
+   2. ANCHOS. `.psection` no es un marco metido 10 px como las bandas: es una
+      caja a todo el ancho con su padding. Su caja VISIBLE iba de 0 a 390 px
+      mientras la banda de al lado iba de 10 a 380, y su contenido arrancaba en
+      20 px mientras el de la banda lo hacia en 30. De ahi los espaciados
+      irregulares: los bordes no cuadraban entre secciones seguidas.
+      Se unifica en movil: todas las secciones son un marco de 10 px con el
+      contenido a otros 16 px, igual que las bandas.
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* --- 1. Cabecera de los proyectos ------------------------------------- */
+
+  /* Altura: era una caja vertical de media pantalla (533 px a 390x844). Ahora
+     baja a 380 px y, sobre todo, deja de imponer la PROPORCION: la foto manda
+     por su ancho y se recorta lo justo por arriba y por abajo (si el marco se
+     queda mas estrecho que la foto, `cover` la AMPLIA para llenarlo y se pierde
+     el doble). */
+  .phero .phero__frame,
+  .project--altessia .phero__frame {
+    aspect-ratio: auto;
+    min-height: min(45svh, 420px);
+    max-height: 440px;
+  }
+
+  /* `.phero` ya aporta los 10 px laterales, asi que el marco no se los sume. */
+  .phero__frame {
+    padding: 0;
+  }
+
+  /* El texto tiene que CABER dentro de la foto: el hueco de la cabecera fija
+     se queda en lo justo y el texto se pega abajo, sobre la imagen. */
+  .phero__top {
+    padding: calc(var(--header-h) + 0.5rem) 1rem 0;
+    max-width: none;
+  }
+
+  .phero__tagline {
+    max-width: none;
+    line-height: 1.38;
+  }
+
+  .phero__title {
+    padding: 0 1rem;
+    margin-top: 0.5rem;
+    /* Con `overflow: hidden` la cola de la letra se cortaba al ir justo al
+       borde inferior del marco; se le deja aire. */
+    padding-bottom: 0.12em;
+  }
+
+  /* El titular, en movil, es el que se comia el alto: a 390 px daba ~84 px de
+     caja. Se contiene para que la etiqueta y la entradilla quepan arriba. */
+  .phero__title,
+  .project--altessia .phero__title,
+  .project--ascaso .phero__title,
+  .project--edusport .phero__title {
+    font-size: clamp(1.9rem, 8.6vw, 3rem);
+    line-height: 0.92;
+  }
+
+  /* La foto, colocada por su foco. En Ascaso el interes esta en la parte baja
+     (la mesa, la cafetera); en Altessia la pareja va centrada. */
+  .project--ascaso .phero__media img,
+  .project--ascaso .phero__media video {
+    object-position: 50% 58%;
+  }
+
+  .project--altessia .phero__media img,
+  .project--altessia .phero__media video {
+    object-position: 50% 52%;
+  }
+
+  /* Edusport: su portada es un COLLAGE de 2,34 de proporcion (1600x685) y una
+     caja de movil es casi cuadrada, asi que el recorte es grande: se ve una
+     franja, no la pieza entera. El cliente prefiere que se comporte como Ascaso
+     y Altessia (foto de fondo y el texto encima) antes que verlo entero con
+     media cabecera en gris, asi que va con `cover` como los otros dos; lo unico
+     propio es el FOCO, puesto en la pieza central del collage. */
+  .project--edusport .phero__media img,
+  .project--edusport .phero__media video {
+    object-position: 50% 50%;
+  }
+
+  /* El collage es CLARO (el papel del fondo es #E0E0E0), asi que la cortina que
+     vale para las fotos de Ascaso y Altessia no llega aqui: el texto blanco se
+     perdia. Se refuerza solo en este proyecto; la formula es la misma. */
+  .project--edusport .phero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.68) 0%,
+      rgba(0, 0, 0, 0.52) 45%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+  }
+
+  /* TRAMPA: la regla global `img[width][height] { height: auto }` (que reserva
+     el hueco antes de cargar) tiene MAS peso que el `height: 100%` del sistema
+     de heroes, asi que aqui la foto se quedaba con su alto natural y dejaba
+     una banda gris debajo, que con la cabecera corta se comia media pantalla.
+     Se repone el 100 % con un selector que si gana. */
+  .phero .phero__media > img,
+  .phero .phero__media > video {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* La cortina oscura se refuerza un punto: con la cabecera mas baja el texto
+     queda mas cerca del tercio claro de la foto y en Edusport (que es muy
+     clara) se perdia. */
+  .phero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.42) 0%,
+      rgba(0, 0, 0, 0.3) 45%,
+      rgba(0, 0, 0, 0.62) 100%
+    );
+  }
+
+  /* --- 2. Un solo ancho de seccion -------------------------------------- */
+
+  /* Las secciones pasan a ser un marco de 10 px, como las bandas, en vez de
+     una caja a todo el ancho: asi el borde visible de dos secciones seguidas
+     coincide y el espaciado deja de bailar. */
+  .psection {
+    margin-inline: 10px;
+    padding-inline: 1rem;
+  }
+
+  /* Las bandas ya van metidas 10 px por su cuenta. */
+  .pband .psection {
+    margin-inline: 0;
+  }
+
+  /* Y la sangria de dentro es LA MISMA en todos los bloques. La ficha del
+     proyecto (24 px), los paneles oscuros (20 px) y las secciones (16 px)
+     dejaban el texto a tres distancias distintas dentro de cajas del mismo
+     ancho: se veia desalineado al bajar la pagina. */
+  .pintro,
+  .pshowcase {
+    padding-inline: 1rem;
+  }
+
+  /* TRAMPA: el numero de la tarjeta (`.pcard__num`) es `inline`, y cuando el
+     titulo parte en DOS lineas (por debajo de ~385 px: "Maquetacion y
+     composicion") la segunda linea se mete DEBAJO del numero y se monta encima
+     de "04.". Ya pasaba antes de este cambio, a 360 px. En movil el numero pasa
+     a un bloque propio encima del titulo, que es lo que pide la regla del
+     cliente: antes mover una fila que perder la legibilidad. */
+  .pcard__num {
+    display: block;
+    margin-bottom: 0.2em;
+  }
+}
