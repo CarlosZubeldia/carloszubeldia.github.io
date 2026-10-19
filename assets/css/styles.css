@@ -6818,11 +6818,21 @@ body.is-locked .header--over-media .brand__dot {
   text-transform: uppercase;
 }
 
-/* Las imagenes llevan ahora su ancho y su alto reales en la etiqueta (los lee el
-   generador). Con `height: auto` el navegador reserva el hueco ANTES de
-   cargarlas y la pagina ya no se desmonta mientras carga en movil; la imagen
-   conserva su proporcion porque la altura se recalcula sola. */
-img[width][height] {
+/* Las imagenes llevan su ancho y su alto reales en la etiqueta (los lee el
+   generador), y el navegador ya reserva el hueco con eso. Esta regla es solo un
+   VALOR POR DEFECTO: va con `:where()` para que su especificidad sea CERO y
+   NUNCA pueda pisar a las reglas de cada componente.
+
+   Historia (importante, costo tres sesiones): antes era
+   `img[width][height] { height: auto }`, con especificidad (0,1,1) e igual que
+   `.phero__media img` o `.pphotos img`, pero escrita AL FINAL del fichero. En
+   los empates de especificidad gana la ultima, asi que se imponia a todos los
+   `height: 100%` de las fotos que van en cajas: la cabecera de proyecto, la
+   galeria de fotografia de Ascaso, las piezas de Altessia... Cada arreglo
+   puntual (`.phero .phero__media > img`, etc.) tapaba un sintoma y el
+   siguiente aparecia en otro componente. Con `:where()` el defecto deja de
+   ganar y cada componente manda en lo suyo. */
+:where(img[width][height]) {
   height: auto;
 }
 
