@@ -7059,3 +7059,28 @@ img[width][height] {
     margin-bottom: 0.2em;
   }
 }
+
+/* ==========================================================================
+   ESCRITORIO: la foto de la cabecera vuelve a llenar su marco (19 oct)
+   --------------------------------------------------------------------------
+   El 15 oct se anadio `img[width][height] { height: auto }` para que el
+   navegador reserve el hueco antes de cargar. Esa regla pesa (0,1,1), lo mismo
+   que `.phero__media img`, y va DESPUES en el fichero, asi que en escritorio
+   ganaba: la foto se quedaba con su ALTO NATURAL y el marco, con
+   `overflow: hidden`, se comia lo que sobraba por abajo. Medido a 1920: la
+   imagen de Ascaso media 1174 px dentro de un marco de 558 (616 px fuera), y
+   se veia "movida" porque el recorte caia en la parte equivocada de la foto.
+   El bloque movil ya lo compensaba (`.phero .phero__media > img`); escritorio
+   no. Aqui se repone el 100 % con un selector que si gana (0,3,1).
+   Solo Ascaso y Altessia, y solo escritorio: es lo que pidio el cliente.
+   ========================================================================== */
+@media (min-width: 1025px) {
+  .project--ascaso .phero .phero__media > img,
+  .project--ascaso .phero .phero__media > video,
+  .project--altessia .phero .phero__media > img,
+  .project--altessia .phero .phero__media > video {
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+}
