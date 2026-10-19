@@ -7177,3 +7177,18 @@ body.is-locked .header--over-media .brand__dot {
     padding: 8.5px 16px;
   }
 }
+
+/* ==========================================================================
+   Escritorio: más aire por debajo del bloque del hero de la home (19 oct)
+   --------------------------------------------------------------------------
+   El bloque (saludo + titular + entradilla + botones) va pegado abajo por
+   `align-items: flex-end` y la separacion al borde la ponia `padding-bottom:
+   96px`. El cliente lo veia demasiado justo: aqui sube a 160 px, o sea 64 px
+   mas de aire abajo sin centrarlo (el de arriba sigue siendo mucho mayor).
+   Solo escritorio: en movil el hero tiene su propia altura y su propio ritmo.
+   ========================================================================== */
+@media (min-width: 1025px) {
+  .hero__frame {
+    padding-bottom: 160px;
+  }
+}

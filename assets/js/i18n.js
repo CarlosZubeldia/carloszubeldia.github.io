@@ -22,7 +22,7 @@ const STRINGS = {
     "nav.skip": "Skip to content",
 
     /* Hero */
-    "hero.role": "Design\nEngineer",
+    "hero.role": "Product\nDesigner",
     "hero.available": "Available for work",
     "hero.claim":
       "I design and build digital products, from concept to code, with AI as part of the process.",
@@ -187,7 +187,7 @@ const STRINGS = {
     "nav.skip": "Saltar al contenido",
 
     /* Hero */
-    "hero.role": "Design\nEngineer",
+    "hero.role": "Product\nDesigner",
     "hero.available": "Disponible para trabajar",
     "hero.claim":
       "Diseño y construyo productos digitales, del concepto al código, con IA como parte del proceso.",
