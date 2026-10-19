@@ -4816,11 +4816,22 @@ h4 {
    reparten con `space-between`, asi que el ultimo toca el borde derecho. */
 .pui__buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
+/* `flex-basis: auto` (no 0) para que cada boton parta de su ancho NATURAL: si
+   los dos caben se quedan en la misma fila repartiendose el sobrante, y si no
+   caben el segundo baja a su propia linea en vez de salirse de la tarjeta (era
+   lo que pasaba a 390 y 555 px: 156 + 156 + 10 = 322 en una caja de 266).
+   `width: auto` es imprescindible: en movil hay una regla general
+   `.btn { width: 100% }` que, al usar `flex-basis: auto`, se convertiria en el
+   tamano base y pondria SIEMPRE un boton por fila. */
 .pui__buttons .btn {
-  flex: 1 1 0;
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
   justify-content: center;
 }
 
@@ -7120,5 +7131,21 @@ body.is-locked .header--over-media .brand__dot {
     height: 100%;
     object-fit: cover;
     object-position: 50% 50%;
+  }
+}
+
+/* ==========================================================================
+   Ascaso: los dos botones de "Componentes de interfaz" (19 oct)
+   --------------------------------------------------------------------------
+   En el Figma son dos pastillas anchas (34,75 px de relleno lateral) y con ese
+   relleno el par mide 322 px: en una tarjeta de 266-296 px se salia por la
+   derecha (lo vio el cliente a ~555 y a 390 px). En pantallas estrechas se
+   recorta el relleno lateral —el texto no cambia— para que sigan EN PARALELO,
+   que es lo que prefiere; y si aun asi no cupieran, el `flex-wrap` de
+   `.pui__buttons` los pone en cascada. Nunca se salen del margen.
+   ========================================================================== */
+@media (max-width: 600px) {
+  .pcard[data-kind="ui"] .btn {
+    padding: 8.5px 16px;
   }
 }
