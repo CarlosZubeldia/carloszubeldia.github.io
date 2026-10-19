@@ -6755,6 +6755,15 @@ body.is-locked .header--over-media .brand__dot {
   .project--altessia #ux-audit .pgrid--4 {
     grid-area: auto;
   }
+
+  /* El aire entre la entradilla y la caja menta del recorrido: en escritorio lo
+     pone el `gap` de la rejilla de la seccion, pero al pasar a una columna el
+     cuerpo se vuelve `display: block` y el gap DESAPARECE. Medido: 0 px a 390,
+     430 y 768 (el cliente lo vio y no sabia si era su movil). Se repone con el
+     mismo ritmo que usa la seccion en el resto de sus bloques. */
+  .project--altessia #ux-audit .pcaption {
+    margin-top: clamp(1.4rem, 2.4vw, 2.05rem);
+  }
 }
 
 /* ----------------------------------------------------------- PAGINA 404 --- */
