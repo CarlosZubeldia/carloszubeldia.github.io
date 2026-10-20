@@ -7195,16 +7195,26 @@ body.is-locked .header--over-media .brand__dot {
    escribe).
    ========================================================================== */
 body:has(.about-section) .about-section {
-  padding-block: clamp(3.4rem, 7.75vw, 7rem);
+  /* Relleno de las secciones de TEXTO: 72 px a 1440 y 40 a 390. */
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-/* La primera seccion conserva su aire de arriba (la cabecera flota encima):
-   solo se iguala el de abajo, que es el que forma el primer salto. */
+/* Las secciones de MEDIOS (los dos carruseles) llevan menos aire que las de texto: 40 px a
+   1440 y 20 a 390. Asi el carrusel queda cerca del texto que lo presenta sin
+   volver a los 57 px de antes, que se veian apretados. */
+body:has(.about-section) .about-section:has(.carousel-block) {
+  padding-block: clamp(1.75rem, 2.9vw, 2.5rem);
+}
+
+/* La primera seccion conserva su aire de arriba (la cabecera flota encima). Su
+   relleno de abajo se ajusta para que el salto ¡Hola! -> Disenar con proposito
+   siga midiendo los ~223 px de referencia: 151 + 72 = 223. */
 body:has(.about-section) main > .section:first-of-type {
-  padding-bottom: clamp(3.4rem, 7.75vw, 7rem);
+  padding-bottom: clamp(5rem, 10.5vw, 9.4rem);
 }
 
-/* Y el bloque de contacto arranca con ese mismo aire. */
+/* El bloque de contacto arranca con el relleno de las secciones de texto, para
+   que el salto desde el carrusel de ilustraciones mida lo mismo que los demas. */
 body:has(.about-section) .contact {
-  padding-top: clamp(3.4rem, 7.75vw, 7rem);
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
 }
