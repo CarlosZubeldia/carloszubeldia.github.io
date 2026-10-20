@@ -7177,3 +7177,34 @@ body.is-locked .header--over-media .brand__dot {
     padding-bottom: 160px;
   }
 }
+
+/* ==========================================================================
+   Sobre mi: UN SOLO ritmo vertical entre secciones (20 oct)
+   --------------------------------------------------------------------------
+   El primer salto de la pagina (¡Hola! -> Disenar con proposito) medía 223 px
+   a 1440: lo sumaban el relleno de `.section` (172,8) y los 48 de la seccion
+   siguiente. Los demas saltos, con las secciones a 48 px, se quedaban en 57-88
+   y el cliente los veia apretados.
+
+   Ahora TODAS las secciones de esta pagina llevan el mismo relleno P, asi que
+   cualquier salto mide 2P: 220 px a 1440 y 108 a 390, que es justo el salto que
+   ya existia y que el cliente usa como referencia.
+
+   Se acota con `body:has(.about-section)` porque `.about-section` solo existe en
+   esta pagina (asi no hay que anadir una clase al <body>, que el generador no
+   escribe).
+   ========================================================================== */
+body:has(.about-section) .about-section {
+  padding-block: clamp(3.4rem, 7.75vw, 7rem);
+}
+
+/* La primera seccion conserva su aire de arriba (la cabecera flota encima):
+   solo se iguala el de abajo, que es el que forma el primer salto. */
+body:has(.about-section) main > .section:first-of-type {
+  padding-bottom: clamp(3.4rem, 7.75vw, 7rem);
+}
+
+/* Y el bloque de contacto arranca con ese mismo aire. */
+body:has(.about-section) .contact {
+  padding-top: clamp(3.4rem, 7.75vw, 7rem);
+}
