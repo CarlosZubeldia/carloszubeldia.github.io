@@ -1066,26 +1066,31 @@ h4 {
 
 /* --- Carrusel de LOGOTIPOS (Sobre mi) ------------------------------------
    Mismo componente que la galeria de ilustraciones (flechas, puntos y
-   deslizamiento) y, desde el 20 oct, tambien la MISMA caja: borde de 1 px,
-   radio y fondo, como las tarjetas de la galeria. El alto lo manda el logo, no
-   los 350 px de una ilustracion. */
+   deslizamiento), pero las piezas son logotipos: caja con el BORDE de la
+   galeria y SIN fondo (el fondo --bg-2 no le gusto al cliente), y logos mas
+   grandes que antes pero sin llegar al tamano de una ilustracion. */
 .carousel--logos .carousel__item {
-  width: clamp(150px, 22vw, 260px);
+  width: clamp(180px, 26vw, 320px);
   height: auto;
   padding: 1rem 1.1rem;
   display: grid;
   place-items: center;
   border: 1px solid #bcbcbc;
   border-radius: var(--radius-box);
-  background: var(--bg-2);
+  background: none;
   overflow: hidden;
 }
 
 .carousel--logos .carousel__item img {
   width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: clamp(44px, 5.5vw, 78px);
+  /* Los logos apaisados (Educa 2,76 y Euroinnova 4,03) se pegaban al borde:
+     con el tope de alto solos, el ancho se comia todo el hueco interior.
+     Aqui se les deja siempre 12 px de aire a cada lado. */
+  max-width: calc(100% - 1.5rem);
+  /* Mas grandes que antes (44-78 px), pero muy por debajo de los 350 de una
+     ilustracion: a 1440 son 110 px de alto. */
+  max-height: clamp(56px, 7vw, 110px);
   object-fit: contain;
 }
 
