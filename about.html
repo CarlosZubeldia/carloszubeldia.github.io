@@ -55,7 +55,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="stylesheet" href="assets/css/styles.css?v=1792405271621">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1792472301368">
 
   <script>
     /* Evita el flash: fija el idioma antes del primer pintado */
@@ -160,24 +160,37 @@
   </section>
 
   <!-- ============================== LOGOTIPOS ========================= -->
-  <section class="section--tight wrap about-section">
+  <!-- Los logos, en el MISMO carrusel que las ilustraciones de abajo (lo pidio
+       el cliente): mismas flechas, mismos puntos y el mismo deslizamiento. La
+       seccion pierde la clase "wrap" para que el carrusel pueda cortarse contra
+       el borde derecho, igual que la galeria. -->
+  <section class="section--tight about-section">
     <h2 class="sr-only"><span data-l="en">Branding</span><span data-l="es">Branding</span></h2>
-    <div class="logo-row reveal">
-      <button class="logo-row__item" type="button" data-lightbox="assets/img/061860cd6d9db2cf2c3be4b6911e54ad5e5e6af6.png" data-caption-en="Wizard" data-caption-es="Wizard">
-        <img src="assets/img/061860cd6d9db2cf2c3be4b6911e54ad5e5e6af6.png?v=95355" width="1600" height="722" alt="Wizard" loading="lazy" decoding="async">
-      </button>
-      <button class="logo-row__item" type="button" data-lightbox="assets/img/aa7ff3c94714268eb6463586ff7e8ad22aa23947.png" data-caption-en="Cruci Ná" data-caption-es="Cruci Ná">
-        <img src="assets/img/aa7ff3c94714268eb6463586ff7e8ad22aa23947.png?v=57912" width="1517" height="843" alt="Cruci Ná" loading="lazy" decoding="async">
-      </button>
-      <button class="logo-row__item" type="button" data-lightbox="assets/img/logos/mi-burbuja-ordenada.svg" data-caption-en="Mi Burbuja Ordenada" data-caption-es="Mi Burbuja Ordenada">
-        <img src="assets/img/logos/mi-burbuja-ordenada.svg?v=25387" width="897" height="939" alt="Mi Burbuja Ordenada" loading="lazy" decoding="async">
-      </button>
-      <button class="logo-row__item" type="button" data-lightbox="assets/img/4dc7f21a75f02a05a0dbfd3fe760e15245731ceb.png" data-caption-en="Educa Open.ai" data-caption-es="Educa Open.ai">
-        <img src="assets/img/4dc7f21a75f02a05a0dbfd3fe760e15245731ceb.png?v=216085" width="1600" height="580" alt="Educa Open.ai" loading="lazy" decoding="async">
-      </button>
-      <button class="logo-row__item" type="button" data-lightbox="assets/img/4ce6435ff3e7491585293a43950bee4dd17a47a8.png" data-caption-en="Euroinnova Play" data-caption-es="Euroinnova Play">
-        <img src="assets/img/4ce6435ff3e7491585293a43950bee4dd17a47a8.png?v=74341" width="1600" height="397" alt="Euroinnova Play" loading="lazy" decoding="async">
-      </button>
+    <div class="carousel-block reveal">
+      <div class="carousel__viewport">
+        <div class="carousel carousel--logos" data-carousel>
+          <button class="carousel__item carousel__item--logo" type="button" data-lightbox="assets/img/061860cd6d9db2cf2c3be4b6911e54ad5e5e6af6.png" data-caption-en="Wizard" data-caption-es="Wizard">
+            <img src="assets/img/061860cd6d9db2cf2c3be4b6911e54ad5e5e6af6.png?v=95355" width="1600" height="722" alt="Wizard" loading="lazy" decoding="async">
+          </button>
+          <button class="carousel__item carousel__item--logo" type="button" data-lightbox="assets/img/aa7ff3c94714268eb6463586ff7e8ad22aa23947.png" data-caption-en="Cruci Ná" data-caption-es="Cruci Ná">
+            <img src="assets/img/aa7ff3c94714268eb6463586ff7e8ad22aa23947.png?v=57912" width="1517" height="843" alt="Cruci Ná" loading="lazy" decoding="async">
+          </button>
+          <button class="carousel__item carousel__item--logo" type="button" data-lightbox="assets/img/logos/mi-burbuja-ordenada.svg" data-caption-en="Mi Burbuja Ordenada" data-caption-es="Mi Burbuja Ordenada">
+            <img src="assets/img/logos/mi-burbuja-ordenada.svg?v=25387" width="897" height="939" alt="Mi Burbuja Ordenada" loading="lazy" decoding="async">
+          </button>
+          <button class="carousel__item carousel__item--logo" type="button" data-lightbox="assets/img/4dc7f21a75f02a05a0dbfd3fe760e15245731ceb.png" data-caption-en="Educa Open.ai" data-caption-es="Educa Open.ai">
+            <img src="assets/img/4dc7f21a75f02a05a0dbfd3fe760e15245731ceb.png?v=216085" width="1600" height="580" alt="Educa Open.ai" loading="lazy" decoding="async">
+          </button>
+          <button class="carousel__item carousel__item--logo" type="button" data-lightbox="assets/img/4ce6435ff3e7491585293a43950bee4dd17a47a8.png" data-caption-en="Euroinnova Play" data-caption-es="Euroinnova Play">
+            <img src="assets/img/4ce6435ff3e7491585293a43950bee4dd17a47a8.png?v=74341" width="1600" height="397" alt="Euroinnova Play" loading="lazy" decoding="async">
+          </button>
+        </div>
+
+        <button class="carousel__arrow carousel__arrow--prev" type="button" data-carousel-prev hidden><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"><span data-l="en">Previous image</span><span data-l="es">Imagen anterior</span></span></button>
+        <button class="carousel__arrow carousel__arrow--next" type="button" data-carousel-next hidden><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"><span data-l="en">Next image</span><span data-l="es">Imagen siguiente</span></span></button>
+      </div>
+
+      <div class="carousel__dots" data-carousel-dots></div>
     </div>
   </section>
 
@@ -310,6 +323,6 @@
       </a>
     </div>
   </footer>
-<script src="assets/js/app.js?v=1792405271621"></script>
+<script src="assets/js/app.js?v=1792472301368"></script>
 </body>
 </html>

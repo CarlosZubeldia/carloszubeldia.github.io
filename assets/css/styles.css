@@ -1007,40 +1007,6 @@ h4 {
 }
 
 /* Fila de logotipos de marca (proyectos de identidad) */
-.logo-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-}
-
-.logo-row__item {
-  display: block;
-  padding: 0.5rem;
-  border: 0;
-  background: none;
-  border-radius: 6px;
-  cursor: zoom-in;
-  transition: transform 0.35s var(--ease);
-}
-
-.logo-row__item:hover,
-.logo-row__item:focus-visible {
-  transform: translateY(-3px);
-}
-
-/* El tope de alto no es estetico: a 1440 los cinco logos tienen que caber en
-   una sola fila. Con el gap de 56 px y este alto suman ~1.220 px de los 1.325
-   disponibles (ocupan el 92% de la fila, antes el 78%). A 90 px se partirian
-   en dos lineas. */
-.logo-row__item img {
-  max-height: clamp(44px, 5.5vw, 78px);
-  max-width: 100%;
-  width: auto;
-  object-fit: contain;
-}
-
 /* Carrusel de ilustraciones
    El margen izquierdo hay que calcularlo: esta seccion no lleva .wrap (la
    galeria tiene que poder cortarse contra el borde derecho de la pantalla), y
@@ -1096,6 +1062,35 @@ h4 {
 
 .carousel__item:hover img {
   transform: scale(1.03);
+}
+
+/* --- Carrusel de LOGOTIPOS (Sobre mi) ------------------------------------
+   Mismo componente que la galeria de ilustraciones (flechaz, puntos y
+   deslizamiento), pero las piezas son logotipos: sin marco, sin fondo y con
+   alto contenido, para que la fila no mida 350 px. El ancho de tarjeta deja ver
+   2-3 logos a la vez en el movil y todos en escritorio. */
+.carousel--logos .carousel__item {
+  width: clamp(150px, 22vw, 260px);
+  height: auto;
+  padding: 0.75rem 1rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  overflow: visible;
+}
+
+.carousel--logos .carousel__item img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: clamp(44px, 5.5vw, 78px);
+  object-fit: contain;
+}
+
+/* Al pasar el raton el logo no se recorta ni se sale de su caja. */
+.carousel--logos .carousel__item:hover img {
+  transform: scale(1.04);
 }
 
 .carousel::-webkit-scrollbar {
@@ -1994,11 +1989,6 @@ h4 {
 
   .about-portrait img {
     aspect-ratio: 4 / 5;
-  }
-
-  .logo-row {
-    justify-content: center;
-    gap: 2rem 2.5rem;
   }
 }
 
@@ -5933,35 +5923,10 @@ body.is-locked .header--over-media .brand__dot {
   transition: filter 0.25s var(--ease);
 }
 
-/* --- Logos de "Sobre mi" en movil ----------------------------------------
-   En escritorio van los cinco en fila con space-between, que ahi funciona. En
-   movil ese reparto deja tres arriba desalineados y dos abajo centrados. Aqui
-   pasan a una rejilla de dos columnas alineada a la izquierda, y el quinto se
-   oculta: quedan dos lineas de dos, que es lo que encaja. El quinto sigue
-   estando en escritorio y en el visor. */
-@media (max-width: 860px) {
-  .logo-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-content: start;
-    justify-items: start;
-    align-items: center;
-    gap: 1.6rem 1.25rem;
-  }
-
-  .logo-row__item {
-    padding: 0;
-    text-align: left;
-  }
-
-  .logo-row__item img {
-    max-height: 44px;
-  }
-
-  .logo-row__item:nth-child(5) {
-    display: none;
-  }
-}
+/* --- Logos de "Sobre mi": ya no hay rejilla --------------------------------
+   Los cinco logos pasaron a un carrusel (mismo componente que las
+   ilustraciones), asi que la rejilla de dos columnas y el "quinto oculto" en
+   movil ya no existen: aqui no queda nada que hacer. */
 
 /* --- La card de "Storytelling premium" de Ascaso -------------------------
    El video trae su propio marco beige dentro del archivo (rgb 224,218,209).
