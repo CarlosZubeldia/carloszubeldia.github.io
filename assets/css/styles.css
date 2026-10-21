@@ -7216,5 +7216,9 @@ body:has(.about-section) main > .section:first-of-type {
 /* El bloque de contacto arranca con el relleno de las secciones de texto, para
    que el salto desde el carrusel de ilustraciones mida lo mismo que los demas. */
 body:has(.about-section) .contact {
+  /* TRAMPA: subir el `padding-top` aqui NO separa nada, porque el relleno va
+     DENTRO de la banda oscura: solo la hace mas alta por arriba. El aire entre
+     el carrusel y la banda lo da el MARGEN. */
   padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  margin-top: clamp(2.5rem, 6.3vw, 5.6rem);
 }
