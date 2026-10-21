@@ -5698,11 +5698,17 @@ h4 {
   z-index: 1;
 }
 
+/* `top` y `bottom` a -1px, NO a 0: las secciones se tocan en coordenadas
+   fraccionarias (1050.78, 1906.44, 5963.59...), asi que cada borde del ::before
+   cae a mitad de un pixel y el navegador lo pinta con transparencia parcial: por
+   esa junta asomaba el hero oscuro, que es la "linea negra" que el cliente veia
+   entre secciones. Con 1 px de solape los dos fondos se pisan y la linea
+   desaparece. */
 .hero ~ *:not(.contact)::before {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: -1px;
+  bottom: -1px;
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
