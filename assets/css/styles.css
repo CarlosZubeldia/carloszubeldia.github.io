@@ -3637,6 +3637,16 @@ h4 {
     aspect-ratio: 2.1;
   }
 
+  /* La PRIMERA foto sigue abarcando dos filas (regla de escritorio) y en esta
+     rejilla de 2x2 se montaba encima de la tercera, que va justo debajo: la
+     columna izquierda salia con las fotos cortadas y descolocadas, mientras la
+     derecha se veia bien. Aqui se devuelve a UNA sola celda (arriba a la
+     izquierda) y las cuatro quedan iguales, en 2x2. */
+  .project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   .project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(2) {
     grid-column: 2;
     grid-row: 1;
