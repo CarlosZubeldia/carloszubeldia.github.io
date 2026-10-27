@@ -536,13 +536,9 @@
       this.img.setAttribute("alt", label);
       if (this.caption) this.caption.textContent = label;
 
-      /* Los logotipos de marca son PNG con mucho blanco: la sombra del visor
-         les queda como un marco sucio alrededor. En las ilustraciones y las
-         capturas no molesta, asi que solo se quita para los logos. */
-      this.root.classList.toggle(
-        "lightbox--logo",
-        el.classList.contains("logo-row__item")
-      );
+      /* El visor ya no lleva sombra para NINGUNA imagen (antes se quitaba solo
+         a los logotipos con la clase `lightbox--logo`), asi que aqui no hay que
+         marcar nada segun el origen. */
 
       if (this.root.getAttribute("data-open") !== "true") {
         this.lastFocus = document.activeElement;

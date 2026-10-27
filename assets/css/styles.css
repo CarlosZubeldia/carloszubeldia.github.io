@@ -1231,13 +1231,9 @@ h4 {
   width: auto;
   height: auto;
   border-radius: var(--radius-box);
-  box-shadow: 0 40px 90px -40px rgba(31, 31, 31, 0.45);
-}
-
-/* Al ampliar un logotipo, sin sombra: el PNG es un rectangulo con mucho blanco
-   y la sombra se veia como un marco sucio alrededor. La marca la pone app.js
-   segun el elemento desde el que se abre el visor. */
-.lightbox--logo .lightbox__img {
+  /* Sin sombra: el cliente no quiere sombreados en las imagenes. La llevaba
+     para dar profundidad sobre el fondo blanco, y en los logotipos (PNG con
+     mucho blanco) se veia como un marco sucio. */
   box-shadow: none;
 }
 
