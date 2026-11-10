@@ -461,10 +461,40 @@ h4 {
   transform: scaleX(1);
 }
 
+/* CTA de la barra: "Hablemos" / "Let's talk". Va el ULTIMO del grupo de la
+   derecha (fuera del menu de texto), para que quede al extremo de la barra, y
+   se ve tambien en movil. En naranja para que destaque; el negro de la barra
+   se queda para el selector de idioma. Misma ALTURA que el selector de idioma
+   (38 px) y el texto centrado en vertical: por eso no lleva relleno arriba ni
+   abajo, que ademas lo mantiene igual en todos los tamanos de letra. */
+.nav__cta {
+  flex: 0 0 auto;
+  height: 38px;
+  padding: 0 1.05em 0 1.15em;
+  font-size: var(--fs-small);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.nav__cta:hover {
+  background: #ffffff;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .header__tools {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+/* Aire extra SOLO entre el selector de idioma y el CTA: al quitarle la pastilla
+   al idioma quedaban los dos demasiado juntos y el naranja parecia colgar del
+   texto. El hueco con el boton de menu se queda como estaba. */
+.header__tools .lang + .burger + .nav__cta,
+.header__tools .lang + .nav__cta {
+  margin-left: 1.1rem;
 }
 
 .tool {
@@ -490,28 +520,58 @@ h4 {
   color: var(--accent);
 }
 
+/* Selector de idioma SIN pastilla: solo las siglas, y un PUNTO NARANJA delante
+   del idioma activo. Es el diseno de la referencia del cliente. Asi deja de
+   competir con el CTA: el unico bloque de color de la cabecera es el boton.
+   El punto es un `::before` que solo se pinta en el activo (`aria-pressed`), el
+   mismo atributo que ya mantiene app.js al cambiar de idioma, asi que no hace
+   falta tocar el JavaScript. */
 .lang {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  padding: 2px;
+  gap: 4px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
 }
 
 .lang__opt {
-  padding: 0.3rem 0.6rem;
-  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3rem 0.35rem;
+  border-radius: 0;
   font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: var(--muted);
-  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+  color: #8a8a8a;
+  transition: color 0.3s var(--ease);
+}
+
+/* El punto: hueco reservado siempre (para que el texto no se mueva al cambiar
+   de idioma) y naranja solo en el activo. */
+.lang__opt::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 0.3s var(--ease);
+}
+
+.lang__opt:hover {
+  color: #000000;
 }
 
 .lang__opt[aria-pressed="true"] {
+  color: #000000;
+  font-weight: 600;
+}
+
+.lang__opt[aria-pressed="true"]::before {
   background: var(--accent);
-  color: #fff;
 }
 
 .burger {
@@ -4583,6 +4643,69 @@ h4 {
   gap: 0.55rem;
 }
 
+/* El boton de email era `.btn--ghost`; al meter el selector de idioma tuve que
+   darle una clase propia para no arrastrar la del sistema. */
+.drawer__cta--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.drawer__cta--ghost:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* --- Selector de idioma DENTRO del cajon (movil) -------------------------
+   En movil el idioma sale de la barra y vive aqui: una pastilla gris con las
+   dos opciones, y la activa en blanco con su punto naranja. Es el diseno de la
+   referencia. */
+.drawer__lang {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 4px;
+  margin-bottom: 0.4rem;
+  background: #ececec;
+  border-radius: 12px;
+}
+
+.drawer__lang-opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  padding: 0.75rem 0.5rem;
+  border-radius: 9px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: #6b6b6b;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+/* Mismo truco que en la barra: el punto existe siempre (para que el texto no
+   se mueva) y solo se pinta en el idioma activo. */
+.drawer__lang-opt::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 0.3s var(--ease);
+}
+
+.drawer__lang-opt[aria-pressed="true"] {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+}
+
+.drawer__lang-opt[aria-pressed="true"]::before {
+  background: var(--accent);
+}
+
 .drawer__icon {
   flex: none;
   width: 16px;
@@ -5642,7 +5765,6 @@ h4 {
 
 .header--over-media:not(.is-stuck) .brand,
 .header--over-media:not(.is-stuck) .nav__link,
-.header--over-media:not(.is-stuck) .lang__opt,
 .header--over-media:not(.is-stuck) .tool {
   color: #ffffff;
 }
@@ -5652,15 +5774,13 @@ h4 {
   border-color: rgba(255, 255, 255, 0.38);
 }
 
-/* El idioma inactivo se aclara para que se distinga del activo. */
-.header--over-media:not(.is-stuck) .lang__opt[aria-pressed="false"] {
-  color: rgba(255, 255, 255, 0.62);
-}
+/* El selector de IDIOMA ya NO entra en este juego. Lleva su propia pastilla
+   gris clara con el texto en negro, asi que se lee igual sobre el hero que
+   sobre la barra blanca: forzarlo a blanco aqui era lo que lo dejaba invisible
+   (el idioma activo, blanco sobre blanco; el inactivo, blanco al 62 %). */
 
 /* El naranja se queda en el punto del logotipo, pero NO en el idioma activo:
-   ese boton ya lleva fondo naranja, asi que su texto tiene que ser blanco. Con
-   el naranja se quedaba naranja sobre naranja y no se veia que idioma estaba
-   seleccionado. */
+   ese boton lleva fondo blanco, asi que su texto va en negro. */
 .header--over-media:not(.is-stuck) .brand__dot {
   color: var(--accent);
 }
@@ -5803,6 +5923,135 @@ main#main {
   }
 }
 
+/* El CTA de la barra es la excepcion a la regla de arriba: en el menu NO puede
+   ocupar todo el ancho, porque vive en una fila (marca + idioma + menu + CTA) y
+   se salia por la derecha: media 263 px de ancho en una barra de 390. Se queda
+   en su ancho natural y el menu recupera su tamano. */
+@media (max-width: 640px) {
+  .header__tools .nav__cta {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .header__tools .burger {
+    flex: 0 0 auto;
+  }
+}
+
+/* En el movil mas estrecho, la fila marca + EN/ES + menu + "Hablemos" no cabe
+   (a 390 px suman ~330 px de contenido). En vez de esconder el CTA, que es
+   justo lo que el cliente quiere que se vea, se recorta el TEXTO del boton y
+   se queda solo la flecha, en un circulo naranja. El texto sigue en el DOM
+   (`sr-only`), asi que el enlace conserva su nombre accesible. */
+@media (max-width: 860px) {
+  /* --- Nuevo orden de la barra: MENU | NOMBRE | CTA ---------------------
+     Lo pide el cliente para movil, y se aplica en TODO el rango en el que manda
+     el cajon (hasta 860 px), para que el telefono y la tableta no se comporten
+     distinto. Se resuelve con una rejilla de tres columnas en `.header__inner`
+     y `display: contents` en `.header__tools`: asi sus hijos (menu y CTA) pasan
+     a ser celdas de la rejilla y se colocan a los lados, con el nombre en el
+     centro. Sin duplicar HTML. En escritorio no cambia nada. */
+  .header__inner {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header__tools {
+    display: contents;
+  }
+
+  .brand {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    min-width: 0;
+  }
+
+  .burger {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .nav__cta {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  /* El selector de idioma ya NO va en la barra: vive dentro del cajon. */
+  .header__tools > .lang {
+    display: none;
+  }
+
+  /* Sin el idioma delante, el aire extra para separarlo del CTA ya no pinta
+     nada y solo robaba ancho. */
+  .header__tools .lang + .nav__cta,
+  .header__tools .lang + .burger + .nav__cta {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 430px) {
+  /* Ahora que el idioma vive en el cajon, el CTA recupera su TEXTO completo
+     ("Hablemos" / "Let's talk"), como en la referencia. Solo se aprieta un poco
+     el relleno y el cuerpo para que quepa junto al nombre y al menu. */
+  .nav__cta {
+    height: 38px;
+    min-width: 0;
+    flex: 0 0 auto;
+    padding: 0 0.85em 0 0.95em;
+    gap: 0.5em;
+    font-size: var(--fs-micro);
+  }
+
+  .nav__cta svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* Solo en el movil mas estrecho el texto no cabe y se queda la flecha en un
+   circulo naranja (el texto sigue en el DOM para lectores de pantalla). */
+@media (max-width: 360px) {
+  .nav__cta {
+    width: 38px;
+    min-width: 38px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .nav__cta-txt {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .nav__cta svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* A 360 px (el movil mas estrecho que se sigue usando) la fila marca + idioma +
+   menu + CTA se pasaba por 1 px: se recorta el margen lateral SOLO de la
+   cabecera, de 20 a 12. Las secciones conservan su `--gutter`, asi que no
+   cambia nada mas de la pagina. */
+@media (max-width: 360px) {
+  .header > .wrap {
+    padding-inline: 12px;
+  }
+}
+
 /* --- En movil el hero no puede llevar altura fija ------------------------
    Con los 980 px del escritorio y el texto anclado abajo, en un movil el bloque
    de texto es MAS alto que la caja: al estar alineado abajo se salia por arriba
@@ -5868,15 +6117,12 @@ main#main {
    negro mientras el menu esta abierto. */
 body.is-locked .header--over-media .brand,
 body.is-locked .header--over-media .nav__link,
-body.is-locked .header--over-media .lang__opt,
 body.is-locked .header--over-media .tool {
   color: #000000;
 }
 
-/* El idioma inactivo tambien, que en el estado claro va aclarado. */
-body.is-locked .header--over-media .lang__opt[aria-pressed="false"] {
-  color: rgba(0, 0, 0, 0.6);
-}
+/* El selector de idioma no necesita este ajuste: su pastilla gris con texto
+   negro se lee igual con el menu abierto. */
 
 /* El punto del logotipo se queda en el naranja de marca. */
 body.is-locked .header--over-media .brand__dot {

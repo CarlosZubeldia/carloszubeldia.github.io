@@ -786,6 +786,119 @@
     },
   };
 
+  /* ----------------------------------------------------- ANCLAS INTERNAS ---
+     Los enlaces que bajan a un bloque de la MISMA pagina (el CTA "Hablemos",
+     que va a #contact, y el "Ver proyectos" del hero) se desplazaban cortos en
+     las paginas con imagenes perezosas: el navegador calcula el destino con la
+     altura que tiene la pagina AL PULSAR, y esa altura crece mientras se baja
+     (las imagenes del final se cargan al acercarse). Medido en Ascaso: se
+     quedaba 1.478 px por encima del bloque de contacto. Peor aun, el navegador
+     no corrige: su animacion ya tiene un punto final.
+
+     Aqui se hace a mano: se fija el destino, se anima, y durante la animacion
+     se VUELVE A MEDIR en cada fotograma, porque la pagina sigue creciendo. Al
+     final queda una red de seguridad para el ultimo crecimiento. */
+  const Anclas = {
+    init() {
+      document.addEventListener(
+        "click",
+        (e) => {
+          const a = e.target.closest && e.target.closest('a[href^="#"]');
+          if (!a) return;
+          const id = a.getAttribute("href").slice(1);
+          if (!id) return;
+          const destino = document.getElementById(id);
+          if (!destino) return;
+          e.preventDefault();
+          if (history.replaceState) history.replaceState(null, "", "#" + id);
+          this.llevar(destino);
+        },
+        true
+      );
+    },
+
+    llegar(el) {
+      /* Mismo desfase que usa el CSS: `scroll-padding-top` del documento. */
+      const cs = getComputedStyle(document.documentElement);
+      const margen = parseFloat(cs.scrollPaddingTop) || 0;
+      /* OJO: aqui NO se recorta al maximo actual de la pagina. La pagina es mas
+         corta de lo que sera (las imagenes perezosas aun no han cargado), y
+         recortar a ese maximo dejaba el destino clavado 1.400 px por encima del
+         bloque. Si el tiro se pasa, el navegador ya lo limita solo. */
+      return el.getBoundingClientRect().top + window.scrollY - margen;
+    },
+
+    llevar(el) {
+      /* Al cancelar el clic nativo, el cajon movil ya no se cierra solo (su
+         cierre es un listener de los enlaces del cajon). Si estaba abierto, se
+         cierra aqui antes de bajar: si no, tapa el bloque al que vamos y deja
+         el scroll del body bloqueado. */
+      const cajon = document.querySelector(".drawer");
+      if (cajon && cajon.getAttribute("data-open") === "true") {
+        cajon.setAttribute("data-open", "false");
+        cajon.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("is-locked");
+      }
+
+      const suave =
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const fijar = () => {
+        const d = this.llegar(el);
+        if (Math.abs(window.scrollY - d) > 2) window.scrollTo(0, d);
+      };
+      if (!suave) {
+        window.scrollTo(0, this.llegar(el));
+        el.focus({ preventScroll: true });
+        return;
+      }
+
+      const t0 = performance.now();
+      const duracion = 700;
+      const desde = window.scrollY;
+
+      const paso = (ahora) => {
+        const p = Math.min(1, (ahora - t0) / duracion);
+        /* Suavizado (easeInOutCubic): arranca y frena, como el scroll nativo. */
+        const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+        /* El destino se RE-MIDE en cada fotograma: mientras se baja, las
+           imagenes perezosas cargan y la pagina crece. */
+        const destino = this.llegar(el);
+        window.scrollTo(0, Math.round(desde + (destino - desde) * e));
+        if (p < 1) requestAnimationFrame(paso);
+        else this.seguir(el, fijar);
+      };
+      requestAnimationFrame(paso);
+    },
+
+    /* La pagina no deja de crecer cuando termina la animacion: las imagenes del
+       bloque al que vamos y las de mas abajo siguen cargando y empujan el
+       contenido hacia abajo. Y no crece de golpe: lo hace a saltos, con pausas
+       en medio (medido en Ascaso: 11.813 -> 12.815 -> 13.130 px). Por eso no
+       vale parar al primer hueco de 8 fotogramas, que fue justo el error: hay
+       que exigir DOS SEGUNDOS sin que se mueva nada, con un tope de 6 s. */
+    seguir(el, fijar) {
+      const t0 = performance.now();
+      let altoAnterior = -1;
+      let quietoDesde = performance.now();
+      const paso = () => {
+        const alto = document.documentElement.scrollHeight;
+        if (alto !== altoAnterior) {
+          altoAnterior = alto;
+          quietoDesde = performance.now();
+        }
+        fijar();
+        const quieto = performance.now() - quietoDesde;
+        if (quieto < 2000 && performance.now() - t0 < 6000) {
+          requestAnimationFrame(paso);
+        } else {
+          fijar();
+          el.focus({ preventScroll: true });
+        }
+      };
+      requestAnimationFrame(paso);
+    },
+  };
+
   /* ---------------------------------------------------------------- INIT --- */
 
   function init() {
@@ -800,6 +913,7 @@
     CardVideo.init();
     Carousel.init();
     Lightbox.init();
+    Anclas.init();
   }
 
   if (document.readyState === "loading") {

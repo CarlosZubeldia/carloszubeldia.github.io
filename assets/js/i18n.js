@@ -20,6 +20,8 @@ const STRINGS = {
     "nav.menu": "Menu",
     "nav.close": "Close",
     "nav.skip": "Skip to content",
+    "nav.lang.es": "Español",
+    "nav.lang.en": "English",
 
     /* Hero */
     "hero.role": "Product\nDesigner",
@@ -185,6 +187,8 @@ const STRINGS = {
     "nav.menu": "Menú",
     "nav.close": "Cerrar",
     "nav.skip": "Saltar al contenido",
+    "nav.lang.es": "Español",
+    "nav.lang.en": "English",
 
     /* Hero */
     "hero.role": "Product\nDesigner",
