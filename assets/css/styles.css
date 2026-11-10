@@ -631,7 +631,9 @@ h4 {
 .drawer__nav {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  /* Aire entre enlaces. Con 0,4rem (6 px) los titulares del menú se veían
+     pegados; ahora hay ~16 px más el interlineado de abajo. */
+  gap: 1rem;
 }
 
 .drawer__link {
@@ -645,7 +647,9 @@ h4 {
      negativo se suaviza: en mayusculas, -0,03em hacia que se tocaran. */
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  line-height: 1.1;
+  /* Interlineado algo más abierto: con 1,1 los titulares del menú respiraban
+     poco. */
+  line-height: 1.16;
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
@@ -4785,7 +4789,17 @@ h4 {
    cambia la zona que responde al dedo. Acotado al cajon: el escritorio no
    cambia. */
 .drawer__foot .lang__opt {
-  min-height: 44px;
+  /* Más grande que en la barra: en el cajón hay sitio de sobra y al dedo le
+     viene mejor. 18 px de texto y 52 de alto. */
+  font-size: 1.125rem;
+  min-height: 52px;
+  padding-inline: 0.8rem;
+}
+
+/* El punto crece con el texto, o se queda diminuto al lado de las siglas. */
+.drawer__foot .lang__opt::before {
+  width: 8px;
+  height: 8px;
 }
 
 .drawer__icon {
