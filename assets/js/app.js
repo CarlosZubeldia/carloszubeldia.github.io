@@ -899,6 +899,72 @@
     },
   };
 
+  /* ----------------------------------------------------------- COOKIES ---
+     El aviso de cookies lo genera build.js en todas las páginas. Aquí solo se
+     gestiona: recuerda la elección y, SOLO si se acepta, carga Google
+     Analytics. La clave y los valores ('si'/'no') son los mismos que usaba la
+     versión escrita a mano, para no volver a preguntar a quien ya eligió.
+
+     El Measurement ID viaja en el propio aviso (`data-ga`), así no hay que
+     duplicarlo aquí ni tocar dos archivos si algún día cambia. */
+  const Cookies = {
+    init() {
+      const caja = $("#cz-cookies");
+      if (!caja) return;
+
+      const CLAVE = "cz-cookies";
+      const ID = caja.getAttribute("data-ga") || "";
+      const leer = () => {
+        try {
+          return localStorage.getItem(CLAVE);
+        } catch (e) {
+          return null;
+        }
+      };
+      const guardar = (v) => {
+        try {
+          localStorage.setItem(CLAVE, v);
+        } catch (e) {}
+      };
+
+      const cargarGA = () => {
+        if (!ID || window.gtag) return;
+        const s = document.createElement("script");
+        s.async = true;
+        s.src =
+          "https://www.googletagmanager.com/gtag/js?id=" +
+          encodeURIComponent(ID);
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag("js", new Date());
+        window.gtag("config", ID);
+      };
+
+      const eleccion = leer();
+      if (eleccion === "si") cargarGA();
+      else if (eleccion !== "no") caja.hidden = false;
+
+      const aceptar = $("#cz-aceptar", caja);
+      const rechazar = $("#cz-rechazar", caja);
+      if (aceptar) {
+        aceptar.addEventListener("click", () => {
+          guardar("si");
+          caja.hidden = true;
+          cargarGA();
+        });
+      }
+      if (rechazar) {
+        rechazar.addEventListener("click", () => {
+          guardar("no");
+          caja.hidden = true;
+        });
+      }
+    },
+  };
+
   /* ---------------------------------------------------------------- INIT --- */
 
   function init() {
@@ -914,6 +980,7 @@
     Carousel.init();
     Lightbox.init();
     Anclas.init();
+    Cookies.init();
   }
 
   if (document.readyState === "loading") {

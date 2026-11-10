@@ -27,9 +27,10 @@ const STRINGS = {
     "hero.role": "Product\nDesigner",
     "hero.available": "Available for work",
     "hero.claim":
-      "I design and build digital products, from concept to code, with AI as part of the process.",
+      "I design and build digital products, from concept to code,\nwith AI as part of the process.",
     "hero.cta.work": "See selected work",
     "hero.cta.talk": "Let’s talk",
+    "hero.hint": "Scroll",
 
     /* Marquee */
     "marquee.1": "Product design",
@@ -143,6 +144,13 @@ const STRINGS = {
     "contact.location": "Location",
     "contact.location.value": "Spain · Remote / Hybrid",
 
+    /* Aviso de cookies */
+    "cookies.label": "Cookie notice",
+    "cookies.text":
+      "I use analytics cookies to improve the site.\nDo you accept them?",
+    "cookies.accept": "Accept",
+    "cookies.reject": "Reject",
+
     /* Proyecto */
     "project.back": "All work",
     "project.overview": "About the project",
@@ -194,9 +202,11 @@ const STRINGS = {
     "hero.role": "Product\nDesigner",
     "hero.available": "Disponible para trabajar",
     "hero.claim":
-      "Diseño y construyo productos digitales, del concepto al código, con IA como parte del proceso.",
+      "Diseño y construyo productos digitales, del concepto al código,\ncon IA como parte del proceso.",
     "hero.cta.work": "Ver proyectos",
     "hero.cta.talk": "Hablemos",
+    /* El cliente quiere la misma palabra en los dos idiomas. */
+    "hero.hint": "Scroll",
 
     /* Marquee */
     "marquee.1": "Diseño de producto",
@@ -309,6 +319,13 @@ const STRINGS = {
     "contact.resume": "CV",
     "contact.location": "Ubicación",
     "contact.location.value": "España · Remoto / Híbrido",
+
+    /* Aviso de cookies */
+    "cookies.label": "Aviso de cookies",
+    "cookies.text":
+      "Uso cookies de analítica para mejorar la web.\n¿Las aceptas?",
+    "cookies.accept": "Aceptar",
+    "cookies.reject": "Rechazar",
 
     /* Proyecto */
     "project.back": "Todos los proyectos",

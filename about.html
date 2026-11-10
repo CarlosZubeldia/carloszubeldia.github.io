@@ -55,7 +55,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="stylesheet" href="assets/css/styles.css?v=1794328539931">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1794349793766">
 
   <script>
     /* Evita el flash: fija el idioma antes del primer pintado */
@@ -115,16 +115,16 @@
     <a class="drawer__link" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener"><span data-l="en">Resume</span><span data-l="es">CV</span></a>
   </nav>
   <div class="drawer__foot">
-    <div class="drawer__lang" role="group" aria-label="Language">
-      <button class="drawer__lang-opt" type="button" data-lang="es" aria-pressed="true"><span lang="es">Español</span></button>
-      <button class="drawer__lang-opt" type="button" data-lang="en" aria-pressed="false"><span lang="en">English</span></button>
+    <!-- Selector de idioma del cajon: usa EXACTAMENTE las clases de la barra de
+         escritorio (.lang / .lang__opt), asi el estilo es el mismo sin copiar
+         CSS. -->
+    <div class="lang" role="group" aria-label="Language">
+      <button class="lang__opt" type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button class="lang__opt" type="button" data-lang="es" aria-pressed="false">ES</button>
     </div>
-    <a class="btn drawer__cta drawer__cta--ghost" href="mailto:carloszubeldiavilchez@gmail.com">
-      <img class="drawer__icon" src="assets/img/icon-mail-negro.svg?v=720" width="24" height="24" alt="" aria-hidden="true"><span data-l="en">Email</span><span data-l="es">Email</span>
-    </a>
-    <a class="btn drawer__cta" href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">
-      <img class="drawer__icon" src="assets/img/icon-linkedin-blanco.svg?v=941" width="25" height="24" alt="" aria-hidden="true">LinkedIn
-    </a>
+    <!-- En movil el CTA vive aqui, a todo el ancho, con el mismo aspecto que en
+         escritorio: naranja, mayusculas y flecha. Sustituye a Email y LinkedIn. -->
+    <a class="btn drawer__cta drawer__cta--brand" href="#contact"><span data-l="en">Let’s talk</span><span data-l="es">Hablemos</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </div>
 
@@ -326,6 +326,16 @@
       </a>
     </div>
   </footer>
-<script src="assets/js/app.js?v=1794328539931"></script>
+<script src="assets/js/app.js?v=1794349793766"></script>
+
+<div class="cookies" id="cz-cookies" role="region" aria-label="Cookies" data-ga="G-0LD2ZWS5QC" hidden>
+  <p class="cookies__text"><span data-l="en">I use analytics cookies to improve the site.
+Do you accept them?</span><span data-l="es">Uso cookies de analítica para mejorar la web.
+¿Las aceptas?</span></p>
+  <div class="cookies__actions">
+    <button class="btn cookies__accept" type="button" id="cz-aceptar"><span data-l="en">Accept</span><span data-l="es">Aceptar</span></button>
+    <button class="btn cookies__reject" type="button" id="cz-rechazar"><span data-l="en">Reject</span><span data-l="es">Rechazar</span></button>
+  </div>
+</div>
 </body>
 </html>

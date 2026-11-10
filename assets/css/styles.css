@@ -435,6 +435,11 @@ h4 {
   font-size: var(--fs-small);
   color: var(--ink-2);
   padding-block: 0.35rem;
+  /* El menu va en mayusculas (lo pide el cliente). Se hace por CSS y no en el
+     contenido, asi vale igual para WORK / ABOUT / RESUME en ingles. El
+     tracking sube un pelin porque en mayusculas las letras se pegan. */
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   transition: color 0.3s var(--ease);
 }
 
@@ -472,6 +477,9 @@ h4 {
   height: 38px;
   padding: 0 1.05em 0 1.15em;
   font-size: var(--fs-small);
+  /* El CTA tambien va en mayusculas, como el resto del menu. */
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   background: var(--accent);
   border-color: var(--accent);
   color: #ffffff;
@@ -627,10 +635,16 @@ h4 {
 }
 
 .drawer__link {
-  font-family: var(--font-display);
+  /* Misma tipografia que el menu de escritorio: Outfit. Antes iba en Clash
+     Display (la de los titulares) y el cliente quiere que coincida con el de
+     arriba. El tamano grande se mantiene: en el cajon es un titular. */
+  font-family: var(--font-sans);
   font-weight: 500;
   font-size: clamp(2rem, 11vw, 3.4rem);
-  letter-spacing: -0.03em;
+  /* Mayusculas tambien en el cajon movil (es el mismo menu). Aqui el tracking
+     negativo se suaviza: en mayusculas, -0,03em hacia que se tocaran. */
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
   line-height: 1.1;
   opacity: 0;
   transform: translateY(18px);
@@ -782,6 +796,10 @@ h4 {
   max-width: 44ch;
   margin-top: clamp(1rem, 2.5vw, 1.75rem);
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.4);
+  /* El texto lleva un salto de linea antes de "con IA como parte del proceso"
+     (y de "with AI..." en ingles). Sin `pre-line` el navegador lo convierte en
+     un espacio. Es el mismo mecanismo que usa el titular. */
+  white-space: pre-line;
 }
 
 .hero__actions {
@@ -1837,6 +1855,98 @@ h4 {
 }
 
 /* 12. FOOTER =============================================================== */
+
+/* --- Aviso de cookies ----------------------------------------------------
+   Antes iba con estilos en linea dentro de index.html (fondo #111, fuente
+   system-ui, acentos #00BA9E y tamanos a mano). Ahora usa los tokens del
+   sistema: radio de 8, sombra del proyecto y Outfit.
+
+   Caja BLANCA con texto negro: sobre el video oscuro del hero, el blanco
+   separa mejor y el texto se lee con mas contraste. El borde es necesario
+   porque la caja se apoya sobre fondo blanco al hacer scroll.
+
+   Va por debajo del cajon (90) y de la cabecera (100) para que no los tape,
+   y por encima del contenido. */
+.cookies {
+  position: fixed;
+  z-index: 80;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  /* Mas estrecha: el texto lleva un salto de linea antes de la pregunta, asi
+     que la caja se ajusta a dos lineas en vez de estirarse a lo ancho. */
+  max-width: 460px;
+  margin-inline: auto;
+  padding: 1.15rem 1.25rem;
+  background: #ffffff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-box);
+  box-shadow: var(--shadow);
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+/* `hidden` necesita su propia regla: si la clase declarase un `display`, el
+   atributo no ocultaria nada (trampa que ya nos mordio en este proyecto). */
+.cookies[hidden] {
+  display: none;
+}
+
+.cookies__text {
+  margin: 0 0 1rem;
+  /* El salto que va antes de la pregunta; sin esto el navegador lo convierte
+     en un espacio. Mismo mecanismo que el reclamo del hero. */
+  white-space: pre-line;
+}
+
+/* Botones centrados en la caja. */
+.cookies__actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Los dos botones, con la altura comoda de pulsar (44 px). */
+.cookies .btn {
+  min-height: 44px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+.cookies__accept {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.cookies__accept:hover {
+  background: #ffffff;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Sobre la caja blanca, el boton secundario va en negro y sin relleno. */
+.cookies__reject {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.cookies__reject:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+/* En movil, los dos botones a lo ancho y uno encima del otro. */
+@media (max-width: 640px) {
+  .cookies__actions .btn {
+    flex: 1 1 100%;
+  }
+}
 
 .footer {
   margin: 0 10px 10px;
@@ -4643,67 +4753,39 @@ h4 {
   gap: 0.55rem;
 }
 
-/* El boton de email era `.btn--ghost`; al meter el selector de idioma tuve que
-   darle una clase propia para no arrastrar la del sistema. */
-.drawer__cta--ghost {
-  background: transparent;
-  color: var(--ink);
-  border-color: var(--line-strong);
-}
-
-.drawer__cta--ghost:hover {
-  background: #000000;
-  color: #ffffff;
-  border-color: #000000;
-}
-
-/* --- Selector de idioma DENTRO del cajon (movil) -------------------------
-   En movil el idioma sale de la barra y vive aqui: una pastilla gris con las
-   dos opciones, y la activa en blanco con su punto naranja. Es el diseno de la
-   referencia. */
-.drawer__lang {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  padding: 4px;
-  margin-bottom: 0.4rem;
-  background: #ececec;
-  border-radius: 12px;
-}
-
-.drawer__lang-opt {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45em;
-  padding: 0.75rem 0.5rem;
-  border-radius: 9px;
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: #6b6b6b;
-  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
-}
-
-/* Mismo truco que en la barra: el punto existe siempre (para que el texto no
-   se mueva) y solo se pinta en el idioma activo. */
-.drawer__lang-opt::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: transparent;
-  transition: background-color 0.3s var(--ease);
-}
-
-.drawer__lang-opt[aria-pressed="true"] {
-  background: #ffffff;
-  color: #000000;
-  font-weight: 600;
-}
-
-.drawer__lang-opt[aria-pressed="true"]::before {
+/* --- CTA del cajon movil: el mismo boton que en escritorio ----------------
+   Mismo aspecto (naranja, mayusculas, flecha) pero a todo el ancho, ocupando
+   el sitio donde estaban Email y LinkedIn. */
+.drawer__cta--brand {
   background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.drawer__cta--brand:hover {
+  background: #ffffff;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* El selector de idioma del cajon usa las clases de la barra (`.lang` y
+   `.lang__opt`), asi que su estilo es exactamente el mismo que en escritorio.
+   Aqui solo se separa del boton y se alinea a la izquierda del pie. */
+.drawer__foot > .lang {
+  align-self: flex-start;
+  margin-bottom: 0.2rem;
+}
+
+/* AREA PULSABLE del selector en el cajon. En la barra de escritorio el boton
+   mide 44x32: con raton va sobrado, pero con el pulgar se queda corto (Apple y
+   Material piden 44x44; WCAG 2.5.8 pide 24x24, que si cumplia). Aqui se sube a
+   44 de alto SIN tocar el aspecto: el texto sigue a 14 px y el punto igual, solo
+   cambia la zona que responde al dedo. Acotado al cajon: el escritorio no
+   cambia. */
+.drawer__foot .lang__opt {
+  min-height: 44px;
 }
 
 .drawer__icon {
@@ -5923,37 +6005,16 @@ main#main {
   }
 }
 
-/* El CTA de la barra es la excepcion a la regla de arriba: en el menu NO puede
-   ocupar todo el ancho, porque vive en una fila (marca + idioma + menu + CTA) y
-   se salia por la derecha: media 263 px de ancho en una barra de 390. Se queda
-   en su ancho natural y el menu recupera su tamano. */
-@media (max-width: 640px) {
-  .header__tools .nav__cta {
-    width: auto;
-    flex: 0 0 auto;
-  }
-
-  .header__tools .burger {
-    flex: 0 0 auto;
-  }
-}
-
-/* En el movil mas estrecho, la fila marca + EN/ES + menu + "Hablemos" no cabe
-   (a 390 px suman ~330 px de contenido). En vez de esconder el CTA, que es
-   justo lo que el cliente quiere que se vea, se recorta el TEXTO del boton y
-   se queda solo la flecha, en un circulo naranja. El texto sigue en el DOM
-   (`sr-only`), asi que el enlace conserva su nombre accesible. */
+/* --- Barra en movil: NOMBRE a la izquierda y MENU a la derecha -----------
+   Lo pide el cliente para movil, y se aplica en todo el rango en el que manda
+   el cajon (hasta 860 px), para que el telefono y la tableta no se comporten
+   distinto. Se resuelve con una rejilla de dos columnas en `.header__inner` y
+   `display: contents` en `.header__tools`: asi el boton de menu pasa a ser una
+   celda mas y se puede llevar al extremo derecho sin duplicar HTML. */
 @media (max-width: 860px) {
-  /* --- Nuevo orden de la barra: MENU | NOMBRE | CTA ---------------------
-     Lo pide el cliente para movil, y se aplica en TODO el rango en el que manda
-     el cajon (hasta 860 px), para que el telefono y la tableta no se comporten
-     distinto. Se resuelve con una rejilla de tres columnas en `.header__inner`
-     y `display: contents` en `.header__tools`: asi sus hijos (menu y CTA) pasan
-     a ser celdas de la rejilla y se colocan a los lados, con el nombre en el
-     centro. Sin duplicar HTML. En escritorio no cambia nada. */
   .header__inner {
     display: grid;
-    grid-template-columns: 40px 1fr auto;
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: 0.5rem;
   }
@@ -5963,92 +6024,27 @@ main#main {
   }
 
   .brand {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
-    justify-self: center;
+    justify-self: start;
     min-width: 0;
   }
 
   .burger {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-  }
-
-  .nav__cta {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 1;
     justify-self: end;
+  }
+
+  /* En movil NO hay CTA en la barra. El contacto sigue a un toque: esta en el
+     cajon (Email y LinkedIn) y en el bloque de contacto del final de la pagina. */
+  .nav__cta {
+    display: none;
   }
 
   /* El selector de idioma ya NO va en la barra: vive dentro del cajon. */
   .header__tools > .lang {
     display: none;
-  }
-
-  /* Sin el idioma delante, el aire extra para separarlo del CTA ya no pinta
-     nada y solo robaba ancho. */
-  .header__tools .lang + .nav__cta,
-  .header__tools .lang + .burger + .nav__cta {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 430px) {
-  /* Ahora que el idioma vive en el cajon, el CTA recupera su TEXTO completo
-     ("Hablemos" / "Let's talk"), como en la referencia. Solo se aprieta un poco
-     el relleno y el cuerpo para que quepa junto al nombre y al menu. */
-  .nav__cta {
-    height: 38px;
-    min-width: 0;
-    flex: 0 0 auto;
-    padding: 0 0.85em 0 0.95em;
-    gap: 0.5em;
-    font-size: var(--fs-micro);
-  }
-
-  .nav__cta svg {
-    width: 13px;
-    height: 13px;
-  }
-}
-
-/* Solo en el movil mas estrecho el texto no cabe y se queda la flecha en un
-   circulo naranja (el texto sigue en el DOM para lectores de pantalla). */
-@media (max-width: 360px) {
-  .nav__cta {
-    width: 38px;
-    min-width: 38px;
-    padding: 0;
-    gap: 0;
-    justify-content: center;
-  }
-
-  .nav__cta-txt {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .nav__cta svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-/* A 360 px (el movil mas estrecho que se sigue usando) la fila marca + idioma +
-   menu + CTA se pasaba por 1 px: se recorta el margen lateral SOLO de la
-   cabecera, de 20 a 12. Las secciones conservan su `--gutter`, asi que no
-   cambia nada mas de la pagina. */
-@media (max-width: 360px) {
-  .header > .wrap {
-    padding-inline: 12px;
   }
 }
 
@@ -6081,6 +6077,10 @@ main#main {
     /* El parrafo no declaraba `line-height` y en movil partia en tres lineas
        muy juntas: con 1.4 respira. */
     line-height: 1.4;
+    /* El salto de linea del reclamo (antes de "con IA como parte del proceso")
+       es SOLO cosa de escritorio: aqui el parrafo debe fluir como siempre, asi
+       que el salto vuelve a ser un espacio. */
+    white-space: normal;
   }
 }
 
@@ -7479,4 +7479,141 @@ body:has(.about-section) .contact {
      el carrusel y la banda lo da el MARGEN. */
   padding-top: clamp(2.5rem, 5vw, 4.5rem);
   margin-top: clamp(2.5rem, 6.3vw, 5.6rem);
+}
+
+/* ==========================================================================
+   HOME · Hero: letra más grande y bloque CENTRADO en altura
+   --------------------------------------------------------------------------
+   El bloque del hero (saludo + "Product Designer" + entradilla) iba pegado
+   abajo con `align-items: flex-end` y un relleno inferior grande (160 px en
+   escritorio, 72 en móvil), así que quedaba descolgado: 432 px de aire arriba
+   frente a 160 abajo a 1440.
+
+   Ahora se centra en la caja y la letra sube un escalón. Va al final del
+   archivo a propósito, para ganar por orden a las reglas anteriores (hay tres
+   sitios distintos que fijan el relleno del marco del hero).
+
+   OJO con el tamaño en móvil: el titular tiene su propio `clamp` a ≤560 px
+   (15vw). Si se dejara solo la regla de escritorio, al ser posterior ganaría
+   también en el móvil y el titular ENCOGERÍA. Por eso se repite abajo con un
+   valor mayor que el que tenía.
+   ========================================================================== */
+.hero__frame {
+  /* Centrado vertical de verdad: mismo aire arriba y abajo. */
+  align-items: center;
+  padding-block: clamp(1.5rem, 5vw, 5.5rem);
+}
+
+.hero__inner {
+  /* Un margen inferior desplazaba el bloque hacia arriba partiendo el centrado. */
+  margin-bottom: 0;
+}
+
+/* El saludo ("Soy Carlos Zubeldia"): de 20,8 a 25,6 px en móvil y de 31,7 a
+   40 px en escritorio. */
+.hero__greeting {
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+}
+
+/* El titular ("Product Designer"): de 121,6 a ~135 px a 1440. */
+.hero__role {
+  font-size: clamp(2.8rem, 9.4vw, 9rem);
+}
+
+/* En móvil, su propio escalón: algo más grande que el que tenía (58,5 px a 390),
+   no menos. */
+@media (max-width: 560px) {
+  .hero__role {
+    font-size: clamp(2.8rem, 17vw, 5.2rem);
+  }
+}
+
+/* ==========================================================================
+   HOME · Indicador de scroll del hero
+   --------------------------------------------------------------------------
+   Texto pequeño centrado en la parte baja del hero, con una flecha que baja.
+   Antes existía uno (se retiró cuando el bloque de texto pasó a ir centrado);
+   este ocupa el hueco que ese dejó.
+
+   Va en `position: absolute` y NO en el flujo: así no empuja el bloque de texto
+   ni altera el centrado que acabamos de dejar.
+   ========================================================================== */
+.hero__hint {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  /* TRAMPA: no vale `bottom: 24px` a secas. En escritorio el hero mide 980 px y
+     la ventana suele ser más baja (900, 800…), así que su parte de abajo queda
+     FUERA de la pantalla y el indicador no se vería nunca (medido: no visible a
+     1440×900). Aquí se calcula el sobrante del hero sobre la ventana
+     (100% − 100svh) y se sube justo eso: el texto queda siempre a 24 px del
+     borde inferior de lo que se ve, esté donde esté el final del hero. */
+  bottom: 1.5rem;
+  bottom: calc(max(0px, 100% - 100svh) + 1.5rem);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-sans);
+  /* 1.125rem = 18 px. No hay token de ese escalón (--fs-small son 16 y
+     --fs-micro 14), así que va en rem como el resto del sistema: si algún día
+     cambia el tamaño base, esto acompaña. */
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* El texto respira despacio y la flecha baja. */
+.hero__hint-txt {
+  animation: hero-hint-texto 3.2s ease-in-out infinite;
+}
+
+.hero__hint-arrow {
+  display: inline-flex;
+  animation: hero-hint-flecha 1.8s ease-in-out infinite;
+}
+
+.hero__hint-arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes hero-hint-texto {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-hint-flecha {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+
+/* Si el sistema pide menos movimiento, el texto se queda quieto y visible. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__hint-txt,
+  .hero__hint-arrow {
+    animation: none;
+  }
+
+  .hero__hint-txt {
+    opacity: 0.85;
+  }
 }
