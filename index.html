@@ -409,5 +409,41 @@ Designer</span></h1>
     </div>
   </footer>
 <script src="assets/js/app.js?v=1794328539931"></script>
+  <!-- Aviso de cookies + Google Analytics -->
+<div id="cz-cookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Uso cookies de analítica para saber qué páginas se visitan y mejorar la web. ¿Las aceptas?</p>
+  <div class="cz-botones">
+    <button type="button" id="cz-aceptar">Aceptar</button>
+    <button type="button" id="cz-rechazar">Rechazar</button>
+  </div>
+</div>
+<style>
+#cz-cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:640px;margin:0 auto;padding:16px;background:#111;color:#fff;border-radius:12px;font:16px/1.5 system-ui,sans-serif;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+#cz-cookies[hidden]{display:none}
+#cz-cookies p{margin:0 0 12px}
+.cz-botones{display:flex;gap:12px;flex-wrap:wrap}
+.cz-botones button{flex:1;min-width:120px;min-height:44px;padding:10px 16px;font:inherit;font-weight:600;color:#111;background:#fff;border:2px solid #fff;border-radius:8px;cursor:pointer}
+.cz-botones button:focus-visible{outline:3px solid #00BA9E;outline-offset:3px}
+</style>
+<script>
+(function(){
+  var ID='G-XXXXXXXXXX', KEY='cz-cookies';
+  var banner=document.getElementById('cz-cookies');
+  function cargarGA(){
+    var s=document.createElement('script');s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id='+ID;document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=function(){dataLayer.push(arguments);};
+    gtag('js',new Date());gtag('config',ID);
+  }
+  function leer(){try{return localStorage.getItem(KEY);}catch(e){return null;}}
+  function guardar(v){try{localStorage.setItem(KEY,v);}catch(e){}}
+  var eleccion=leer();
+  if(eleccion==='si'){cargarGA();}
+  else if(eleccion!=='no'){banner.hidden=false;}
+  document.getElementById('cz-aceptar').onclick=function(){guardar('si');banner.hidden=true;cargarGA();};
+  document.getElementById('cz-rechazar').onclick=function(){guardar('no');banner.hidden=true;};
+})();
+</script>
 </body>
 </html>
