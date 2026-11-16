@@ -7677,4 +7677,16 @@ body:has(.about-section) .contact {
   .work-grid .project-card__media {
     aspect-ratio: 1 / 1;
   }
+
+  /* Ascaso: su vídeo es una composición apaisada y con la caja cuadrada
+     `cover` lo cortaba. En móvil se ve ENTERO (`contain`), centrado, y el
+     espacio que sobra arriba/abajo se rellena con el color de la tarjeta. */
+  .project-card--mockup .project-card__media {
+    background: #e0dad1;
+  }
+
+  .project-card--mockup .project-card__media video {
+    object-fit: contain;
+    transform: none;
+  }
 }
