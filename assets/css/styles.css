@@ -7667,3 +7667,14 @@ body:has(.about-section) .contact {
     opacity: 0.85;
   }
 }
+
+/* --- Tarjetas más altas en móvil -----------------------------------------
+   A 390 px la miniatura 2/1 medía 175 px de alto y el vídeo/logo quedaban
+   muy apretados. En teléfonos pasa a 1/1: unos 180 px más a 390 y 215 a 430.
+   Solo móvil; en tablet y escritorio se queda la proporción 2/1 de siempre. */
+@media (max-width: 480px) {
+  .project-card__media,
+  .work-grid .project-card__media {
+    aspect-ratio: 1 / 1;
+  }
+}
