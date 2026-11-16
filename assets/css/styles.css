@@ -7700,3 +7700,14 @@ body:has(.about-section) .contact {
     margin-top: 2rem;
   }
 }
+
+/* --- El logo de Rock Bikes escala con la tarjeta -------------------------
+   El logo genérico lleva `width: min(62%, 300px)`, un tope heredado de
+   Borealis: en la tarjeta ancha de la home siempre medía lo mismo. Para Rock
+   Bikes se quita el tope y el ancho va en proporción a la tarjeta. Se acota
+   por `data-project` para no tocar el logo de Borealis. */
+.project-card[data-project="rockbikes"] .project-card__media img.project-card__logo {
+  width: 62%;
+  max-width: none;
+  aspect-ratio: 228 / 24;
+}
