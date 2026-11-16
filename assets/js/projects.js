@@ -43,7 +43,9 @@ const PROJECTS = [
        hero, que es lo que se ve en la rejilla de trabajos. */
     cover: IMG + "rockbikes-cover.webp",
     cardPoster: IMG + "rockbikes-hero.webp",
-    coverVideo: "assets/video/rockbikes-card.mp4",
+    coverVideo: "assets/video/rockbikes-card-hd.mp4",
+    /* Vídeo ambiental de la tarjeta: en bucle infinito. */
+    coverVideoLoop: true,
     cardTitleUpper: true,
     /* Logotipo de la marca, centrado sobre la miniatura (mismo componente que
        la tarjeta de Borealis). Se muestra en la home y en la página de
