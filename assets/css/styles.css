@@ -7687,6 +7687,9 @@ body:has(.about-section) .contact {
 
   .project-card--mockup .project-card__media video {
     object-fit: contain;
-    transform: none;
+    /* Un poco de zoom para que el detalle del portátil se lea mejor. El
+       sobrante lateral del propio vídeo (crema) se recorta con el
+       `overflow: hidden` de la tarjeta; arriba y abajo queda el fondo. */
+    transform: scale(1.3);
   }
 }
