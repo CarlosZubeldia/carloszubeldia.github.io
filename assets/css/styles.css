@@ -1920,29 +1920,21 @@ h4 {
   font-weight: 500;
 }
 
-.cookies__accept {
+/* Aceptar y rechazar, con EL MISMO estilo: la AEPD pide que rechazar sea igual
+   de facil que aceptar, y un boton solo con borde parece secundario. Los dos
+   van rellenos en naranja y comparten el mismo hover. */
+.cookies__accept,
+.cookies__reject {
   background: var(--accent);
   border-color: var(--accent);
   color: #ffffff;
 }
 
-.cookies__accept:hover {
+.cookies__accept:hover,
+.cookies__reject:hover {
   background: #ffffff;
   border-color: var(--accent);
   color: var(--accent);
-}
-
-/* Sobre la caja blanca, el boton secundario va en negro y sin relleno. */
-.cookies__reject {
-  background: transparent;
-  border-color: var(--line-strong);
-  color: var(--ink);
-}
-
-.cookies__reject:hover {
-  background: #000000;
-  border-color: #000000;
-  color: #ffffff;
 }
 
 /* En movil, los dos botones a lo ancho y uno encima del otro. */
@@ -7152,6 +7144,14 @@ body.is-locked .header--over-media .brand__dot {
    siguiente aparecia en otro componente. Con `:where()` el defecto deja de
    ganar y cada componente manda en lo suyo. */
 :where(img[width][height]) {
+  height: auto;
+}
+
+/* Lo mismo para los videos con ancho y alto en la etiqueta (el recorrido de
+   Rock Bikes): `:where()` deja la especificidad a cero y la proporcion se
+   mantiene al 100% de ancho. Sin esto, el alto del atributo (768 px) se queda
+   fijo y el video sale estirado en movil. */
+:where(video[width][height]) {
   height: auto;
 }
 

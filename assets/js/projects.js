@@ -1449,6 +1449,411 @@ const PROJECTS = [
     ],
   },
 
+  /* ---------------------------------------------------------- ROCK BIKES */
+  /* Caso de estudio de un e-commerce de bicicletas de montaña llevado de
+     Figma a código con IA. El demo vive fuera de este sitio (se publica en
+     carloszubeldia.com/RockBikes/), por eso el enlace es absoluto. */
+  {
+    id: "rockbikes",
+    layout: "rich",
+    title: "Rock Bikes",
+    /* En el diseño el titular del hero va en minúsculas, tal cual. */
+    heroTitle: "rock bikes",
+    category: { en: "E-commerce / Design + AI", es: "E-commerce / Diseño + IA" },
+    tagline: {
+      en: "From a Figma design to a real website, built with AI and without knowing how to code.",
+      es: "De un diseño en Figma a una web real, construida con IA y sin saber programar.",
+    },
+    /* La entradilla del hero dice un poco mas que la de la tarjeta. */
+    heroTagline: {
+      en: "From a Figma design to a real, working website, built with AI and without knowing how to code.",
+      es: "De un diseño en Figma a una web real y funcional, construida con IA y sin saber programar.",
+    },
+    year: "2026",
+    /* `cover` es la imagen social (og:image); el póster de la tarjeta es el
+       hero, que es lo que se ve en la rejilla de trabajos. */
+    cover: IMG + "rockbikes-cover.webp",
+    cardPoster: IMG + "rockbikes-hero.webp",
+    coverVideo: "assets/video/rockbikes-card.mp4",
+    cardTitleUpper: true,
+    hero: IMG + "rockbikes-hero.webp",
+    link: "https://carloszubeldia.com/RockBikes/index.html",
+    facts: [
+      { label: { en: "My role", es: "Mi rol" }, value: { en: "Product Designer", es: "Product Designer" } },
+      { label: { en: "Duration", es: "Duración" }, value: { en: "6 weeks", es: "6 semanas" } },
+      {
+        label: { en: "Tools", es: "Herramientas" },
+        value: { en: "Figma · Cursor · GitHub", es: "Figma · Cursor · GitHub" },
+      },
+    ],
+    skills: [
+      { en: "Design to code", es: "Del diseño al código" },
+      { en: "AI workflow", es: "Flujo de trabajo con IA" },
+      { en: "UI Design", es: "Diseño de interfaz" },
+      { en: "Responsive", es: "Responsive" },
+      { en: "Accessibility", es: "Accesibilidad" },
+      { en: "E-commerce", es: "E-commerce" },
+    ],
+    intro: {
+      en: [
+        "Rock Bikes is my first project built with AI: the home page and product page of a mountain bike e-commerce site, taken from Figma to code.",
+        "The design comes from an agency project for an electric scooter shop. To be able to show it, I anonymised it: new name, new brand and mountain bikes instead of scooters.",
+        "The code was written by AI. My work was to design, set the rules, review every change and decide when something was finished.",
+      ],
+      es: [
+        "Rock Bikes es mi primer proyecto construido con IA: la home y la ficha de producto de un e-commerce de bicicletas de montaña, llevadas de Figma a código.",
+        "El diseño parte de un proyecto de agencia para una tienda de patinetes eléctricos. Para poder enseñarlo lo anonimicé: nuevo nombre, nueva marca y bicis de montaña en lugar de patinetes.",
+        "El código lo escribió la IA. Mi trabajo fue diseñar, fijar las reglas, revisar cada cambio y decidir cuándo algo estaba terminado.",
+      ],
+    },
+
+    sections: [
+      /* ---------------------------------------------- RETO Y ALCANCE ---- */
+      {
+        /* En el diseño no hay rótulo de sección: las dos cajas lo llevan. */
+        id: "challenge",
+        /* Solo cajas a todo el ancho: no lleva columna de texto. */
+        noBody: true,
+        blocks: [
+          {
+            t: "boxes",
+            full: true,
+            items: [
+              {
+                theme: "soft",
+                label: { en: "Challenge", es: "El reto" },
+                ps: [
+                  {
+                    en: "Turn a high-fidelity Figma design into a website that looks identical to the design and whose interactions feel like a real shop: menus, search, carousels, video and a product page.",
+                    es: "Convertir un diseño de Figma de alta fidelidad en una web idéntica al diseño y con interacciones que se sientan como las de una tienda real: menús, buscador, carruseles, vídeo y ficha de producto.",
+                  },
+                  {
+                    en: "The added difficulty: I'm a designer, not a developer. I needed a way of working with AI where I kept control over the result.",
+                    es: "La dificultad añadida: soy diseñador, no programador. Necesitaba una forma de trabajar con la IA en la que yo mantuviera el control del resultado.",
+                  },
+                ],
+              },
+              {
+                theme: "soft",
+                label: { en: "Scope", es: "Alcance" },
+                ps: [
+                  {
+                    en: "A complete home page with 11 sections and a product page, both adapted to mobile. The rest of the links are placeholders: the goal was to show the process, not to launch a shop.",
+                    es: "Una home completa con 11 secciones y una ficha de producto, ambas adaptadas a móvil. El resto de enlaces son provisionales: el objetivo era mostrar el proceso, no lanzar una tienda.",
+                  },
+                  {
+                    en: "A static website with no frameworks or build step: plain HTML, CSS and JavaScript that anyone can open and maintain.",
+                    es: "Una web estática sin frameworks ni compilación: HTML, CSS y JavaScript que cualquiera puede abrir y mantener.",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------------ RESULTADO -- */
+      {
+        id: "result",
+        label: { en: "The result", es: "El resultado" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "A walk through the home page: sticky video hero, terrain selector, draggable catalogue, brands, accessories with a long scroll, blog, reviews and footer.",
+              es: "Un recorrido por la home: hero con vídeo fijo, selector de terreno, catálogo arrastrable, marcas, accesorios con scroll largo, blog, opiniones y footer.",
+            },
+          },
+          {
+            t: "media",
+            full: true,
+            video: "assets/video/rockbikes-scroll.mp4",
+            src: IMG + "rockbikes-scroll-poster.jpg",
+            /* Con controles y sin autoplay: es un recorrido largo y lo decide
+               ver quien mira. Las medidas reservan el hueco al cargar. */
+            videoControls: true,
+            videoWidth: 1366,
+            videoHeight: 768,
+            caption: {
+              en: "Scroll through the home page (sped up)",
+              es: "Recorrido por la home (acelerado)",
+            },
+          },
+        ],
+      },
+
+      /* ---------------------------------------- CÓMO TRABAJÉ CON LA IA --- */
+      {
+        id: "process",
+        theme: "soft",
+        label: { en: "How I worked with AI", es: "Cómo trabajé con la IA" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "AI writes code fast, but it doesn't know when the result is right. I organised the project so that every decision was mine and every change could be checked.",
+              es: "La IA escribe código rápido, pero no sabe cuándo el resultado está bien. Organicé el proyecto para que cada decisión fuera mía y cada cambio se pudiera comprobar.",
+            },
+          },
+          {
+            t: "cards",
+            full: true,
+            cols: 2,
+            items: [
+              {
+                num: "01.",
+                kind: "text",
+                title: { en: "Figma as the source of truth", es: "Figma como fuente de verdad" },
+                ps: [
+                  {
+                    en: "Cursor read the design directly from Figma through its API: frames, colours, type sizes and images. Each section was built from its frame and compared against its render.",
+                    es: "Cursor leía el diseño directamente de Figma a través de su API: frames, colores, tamaños de texto e imágenes. Cada sección se construyó a partir de su frame y se comparó con su render.",
+                  },
+                ],
+              },
+              {
+                num: "02.",
+                kind: "text",
+                title: { en: "Project rules", es: "Reglas del proyecto" },
+                ps: [
+                  {
+                    en: "I wrote rules the AI follows in every conversation: style guide, mobile layout, WCAG 2.2 AA accessibility and how to work with me (small changes, plain-language explanations, ask before big changes).",
+                    es: "Escribí reglas que la IA sigue en cada conversación: guía de estilos, maquetación móvil, accesibilidad WCAG 2.2 AA y cómo trabajar conmigo (cambios pequeños, explicaciones sin jerga, preguntar antes de cambios grandes).",
+                  },
+                ],
+              },
+              {
+                num: "03.",
+                kind: "text",
+                title: { en: "Measure, don't eyeball", es: "Medir, no mirar a ojo" },
+                ps: [
+                  {
+                    en: "Nothing was accepted without proof. Each change ended with a real browser screenshot or a measurement, compared with the Figma frame. The product page differs from its design by 1.89% of pixels.",
+                    es: "Nada se daba por bueno sin una prueba. Cada cambio terminaba con una captura real del navegador o una medida, comparada con el frame de Figma. La ficha de producto difiere de su diseño en un 1,89 % de los píxeles.",
+                  },
+                ],
+              },
+              {
+                num: "04.",
+                kind: "text",
+                title: { en: "Versions and memory", es: "Versiones y memoria" },
+                ps: [
+                  {
+                    en: "I created my own commands to review a page and save a version. Each structural change was documented in a decision log, so any AI or person can pick up the project without losing context.",
+                    es: "Creé mis propios comandos para revisar una página y guardar una versión. Cada cambio estructural se documentó en una bitácora de decisiones, para que cualquier IA o persona pueda retomar el proyecto sin perder el contexto.",
+                  },
+                ],
+              },
+            ],
+          },
+          /* Las tres cifras del proyecto. Los números van como texto plano. */
+          {
+            t: "cols",
+            full: true,
+            cols: 3,
+            style: "margin-top:2.5rem",
+            items: [
+              {
+                title: "70",
+                v: {
+                  en: "versions saved in GitHub, one per change",
+                  es: "versiones guardadas en GitHub, una por cambio",
+                },
+              },
+              {
+                title: "1,89 %",
+                v: {
+                  en: "pixel difference between the product page and its design",
+                  es: "de diferencia en píxeles entre la ficha y su diseño",
+                },
+              },
+              {
+                title: "0",
+                v: {
+                  en: "frameworks or external libraries",
+                  es: "frameworks o librerías externas",
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ----------------------------------------------------------- HOME -- */
+      {
+        id: "home",
+        noBody: true,
+        label: { en: "The home page", es: "La home" },
+        blocks: [
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Shop by terrain", es: "Comprar por terreno" },
+            v: {
+              en: "Five disciplines with their travel in millimetres. The panels expand on hover and on keyboard focus, so the interaction doesn't depend on the mouse.",
+              es: "Cinco disciplinas con su recorrido en milímetros. Los paneles se ensanchan al pasar el ratón y también con el foco del teclado, para que la interacción no dependa del ratón.",
+            },
+            images: [
+              {
+                src: IMG + "rockbikes-terrain.webp",
+                alt: "Choose your terrain section with five panels: XC, Trail, Enduro, Downhill and E-MTB",
+              },
+            ],
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Catalogue and brands", es: "Catálogo y marcas" },
+            v: {
+              en: "Draggable product carousel with pagination dots, and a brands block that combines video and logos.",
+              es: "Carrusel de producto arrastrable con puntos de paginación y un bloque de marcas que combina vídeo y logos.",
+            },
+            images: [
+              {
+                src: IMG + "rockbikes-products.webp",
+                alt: "Find your perfect bike catalogue with product cards",
+              },
+              {
+                src: IMG + "rockbikes-brands.webp",
+                alt: "Our brands section with video and featured brand",
+              },
+            ],
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Accessories and blog", es: "Accesorios y blog" },
+            v: {
+              en: "In accessories the panel stays fixed and the category changes as you scroll. The blog is a draggable row of eight cards.",
+              es: "En accesorios el panel se queda fijo y la categoría cambia con el scroll. El blog es una fila arrastrable de ocho tarjetas.",
+            },
+            images: [
+              {
+                src: IMG + "rockbikes-riders.webp",
+                alt: "Accessories section with a list of categories and a fixed photo panel",
+              },
+              {
+                src: IMG + "rockbikes-news.webp",
+                alt: "Latest news section with blog cards",
+              },
+            ],
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Menu and footer", es: "Menú y footer" },
+            v: {
+              en: "Three-level menu with product previews, full-screen search on mobile, and a header that steps aside when the footer arrives.",
+              es: "Menú de tres niveles con vista previa de producto, buscador a pantalla completa en móvil y una cabecera que se retira cuando llega el footer.",
+            },
+            images: [
+              {
+                src: IMG + "rockbikes-menu.webp",
+                alt: "Open menu with the main categories",
+              },
+              {
+                src: IMG + "rockbikes-footer.webp",
+                alt: "Yellow footer with the large logo and link columns",
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ----------------------------------------- FICHA DE PRODUCTO Y MÓVIL */
+      {
+        id: "product",
+        theme: "soft",
+        label: { en: "Product page and mobile", es: "Ficha de producto y móvil" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "Draggable gallery with a full-screen viewer, a floating purchase box, specifications, accordions, reviews and related products. Both pages adapt down to 390 px with their own mobile layout.",
+              es: "Galería arrastrable con visor a pantalla completa, caja de compra flotante, características, acordeones, opiniones y productos relacionados. Las dos páginas se adaptan hasta 390 px con su propia maquetación móvil.",
+            },
+          },
+          {
+            t: "media",
+            full: true,
+            src: IMG + "rockbikes-ficha.webp",
+            alt: "Product page with photo gallery, purchase box and specifications",
+          },
+          /* Las dos capturas de móvil, juntas y centradas. */
+          {
+            t: "grid",
+            full: true,
+            cols: 2,
+            style: "max-width:720px;margin:2rem auto 0",
+            items: [
+              { src: IMG + "rockbikes-m-home.webp", alt: "Home page on mobile" },
+              { src: IMG + "rockbikes-m-ficha.webp", alt: "Product page on mobile" },
+            ],
+          },
+        ],
+      },
+
+      /* ---------------------------------------------- DECISIONES CLAVE --- */
+      {
+        id: "decisions",
+        noBody: true,
+        label: { en: "Key design decisions", es: "Decisiones clave de diseño" },
+        blocks: [
+          {
+            t: "cols",
+            full: true,
+            cols: 3,
+            items: [
+              {
+                title: { en: "A system, not pages", es: "Un sistema, no páginas" },
+                v: {
+                  en: "Tokens for every repeated colour and measurement, one button family with shared states and one rule for headings: new sections fit in without breaking the whole.",
+                  es: "Tokens para cada color y medida repetidos, una sola familia de botones con estados compartidos y una regla para los titulares: las secciones nuevas encajan sin romper el conjunto.",
+                },
+              },
+              {
+                title: { en: "Contrast over video", es: "Contraste sobre vídeo" },
+                v: {
+                  en: "A dark layer over the hero video keeps the text readable on every frame. Card numbers that blended into light photos were switched to pure white.",
+                  es: "Una capa oscura sobre el vídeo del hero mantiene el texto legible en cualquier fotograma. Los números de tarjeta que se perdían sobre fotos claras pasaron a blanco puro.",
+                },
+              },
+              {
+                title: { en: "Usable without a mouse", es: "Usable sin ratón" },
+                v: {
+                  en: "Visible focus on every control, hover interactions that also work with the keyboard, and hidden elements kept out of the tab order.",
+                  es: "Foco visible en todos los controles, interacciones de hover que también funcionan con teclado y elementos ocultos fuera del orden de tabulación.",
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------- REFLEXIONES ----- */
+      {
+        id: "conclusion",
+        label: { en: "Reflections", es: "Reflexiones" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "AI didn't replace design work: it moved it. Less time drawing, more time defining rules, reviewing and deciding. The clearer the design system and the criteria, the better the code the AI produced.",
+              es: "La IA no sustituyó el trabajo de diseño: lo desplazó. Menos tiempo dibujando y más tiempo definiendo reglas, revisando y decidiendo. Cuanto más claros eran el sistema de diseño y los criterios, mejor era el código que producía la IA.",
+            },
+          },
+          {
+            t: "p",
+            v: {
+              en: "This project shows I can take a design all the way to a working product and work with developers using the same language.",
+              es: "Este proyecto demuestra que puedo llevar un diseño hasta un producto que funciona y trabajar con desarrollo hablando el mismo idioma.",
+            },
+          },
+        ],
+      },
+    ],
+  },
+
   /* ------------------------------------------------------------- BOREALIS */
   /* Proyecto externo: no tiene caso de estudio propio, la tarjeta enlaza
      directamente al artículo publicado en Medium.                        */
