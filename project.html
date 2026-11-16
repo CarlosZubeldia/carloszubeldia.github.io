@@ -10,7 +10,7 @@
     /* Conserva los enlaces antiguos del tipo project.html?id=ascaso */
     (function () {
       var id = new URLSearchParams(location.search).get("id");
-      var known = ["ascaso", "altessia", "edusport", "rockbikes"];
+      var known = ["rockbikes", "ascaso", "altessia", "edusport"];
       location.replace(known.indexOf(id) > -1 ? id + ".html" : "work.html");
     })();
   </script>
@@ -18,10 +18,12 @@
 <body>
   <p><a href="work.html">Work</a></p>
 
-<div class="cookies" id="cz-cookies" role="region" aria-label="Cookies" data-ga="G-0LD2ZWS5QC" hidden>
-  <p class="cookies__text"><span data-l="en">I use analytics cookies to improve the site.
+<div class="cookies" id="cz-cookies" role="region" aria-labelledby="cz-cookies-title" aria-describedby="cz-cookies-text" data-ga="G-0LD2ZWS5QC" hidden>
+  <h2 class="sr-only" id="cz-cookies-title"><span data-l="en">Cookie notice</span><span data-l="es">Aviso de cookies</span></h2>
+  <p class="cookies__text" id="cz-cookies-text"><span data-l="en">I use analytics cookies to improve the site.
 Do you accept them?</span><span data-l="es">Uso cookies de analítica para mejorar la web.
 ¿Las aceptas?</span></p>
+  <p class="cookies__more"><a href="cookies.html"><span data-l="en">Learn more</span><span data-l="es">Más información</span></a></p>
   <div class="cookies__actions">
     <button class="btn cookies__accept" type="button" id="cz-aceptar"><span data-l="en">Accept</span><span data-l="es">Aceptar</span></button>
     <button class="btn cookies__reject" type="button" id="cz-rechazar"><span data-l="en">Reject</span><span data-l="es">Rechazar</span></button>

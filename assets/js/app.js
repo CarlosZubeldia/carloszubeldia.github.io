@@ -914,6 +914,8 @@
 
       const CLAVE = "cz-cookies";
       const ID = caja.getAttribute("data-ga") || "";
+      let disparador = null;
+
       const leer = () => {
         try {
           return localStorage.getItem(CLAVE);
@@ -943,25 +945,84 @@
         window.gtag("config", ID);
       };
 
+      /* Borra _ga y _ga_* en el dominio actual y en las dos variantes del
+         dominio del sitio. GA puede dejar la cookie como host-only o con
+         Domain, así que se intentan las tres. */
+      const borrarCookiesGA = () => {
+        const nombres = document.cookie
+          .split(";")
+          .map((c) => c.split("=")[0].trim())
+          .filter((n) => /^_ga($|_)/.test(n));
+        const dominios = ["carloszubeldia.com", ".carloszubeldia.com"];
+        nombres.forEach((nombre) => {
+          const base = nombre + "=; path=/; SameSite=Lax";
+          /* Host-only (como las pone GA por defecto). */
+          document.cookie = base + "; Max-Age=0";
+          document.cookie =
+            base + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          dominios.forEach((dominio) => {
+            const conDominio = base + "; domain=" + dominio;
+            document.cookie = conDominio + "; Max-Age=0";
+            document.cookie =
+              conDominio + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          });
+        });
+      };
+
+      const aceptar = $("#cz-aceptar", caja);
+      const rechazar = $("#cz-rechazar", caja);
+      const primero = aceptar || rechazar;
+
+      /* «Configurar cookies» (pie): vuelve a mostrar el aviso y lleva el foco
+         al primer botón para que se pueda decidir con el teclado. */
+      const abrir = (boton) => {
+        disparador = boton || null;
+        caja.hidden = false;
+        if (primero) primero.focus();
+      };
+
+      const cerrar = () => {
+        caja.hidden = true;
+        if (disparador) {
+          const boton = disparador;
+          disparador = null;
+          boton.focus();
+        }
+      };
+
       const eleccion = leer();
       if (eleccion === "si") cargarGA();
       else if (eleccion !== "no") caja.hidden = false;
 
-      const aceptar = $("#cz-aceptar", caja);
-      const rechazar = $("#cz-rechazar", caja);
       if (aceptar) {
         aceptar.addEventListener("click", () => {
           guardar("si");
-          caja.hidden = true;
           cargarGA();
+          cerrar();
         });
       }
       if (rechazar) {
         rechazar.addEventListener("click", () => {
+          /* Si antes había aceptado, hay que retirar el consentimiento de
+             verdad: se borran las cookies de GA y se recarga para que el
+             script no se vuelva a cargar. */
+          const antes = leer();
           guardar("no");
-          caja.hidden = true;
+          if (antes === "si" || window.gtag) {
+            borrarCookiesGA();
+            caja.hidden = true;
+            window.location.reload();
+            return;
+          }
+          cerrar();
         });
       }
+
+      document
+        .querySelectorAll("[data-cookie-settings]")
+        .forEach((boton) => {
+          boton.addEventListener("click", () => abrir(boton));
+        });
     },
   };
 

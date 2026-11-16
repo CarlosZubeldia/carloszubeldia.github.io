@@ -150,6 +150,37 @@ const STRINGS = {
       "I use analytics cookies to improve the site.\nDo you accept them?",
     "cookies.accept": "Accept",
     "cookies.reject": "Reject",
+    "cookies.more": "Learn more",
+    "cookies.page.title": "Cookie policy",
+    "cookies.page.lead":
+      "This site only uses analytics cookies, and only if you accept them. Here is what is stored, why, and how to change your choice.",
+    "cookies.page.what.title": "What are cookies?",
+    "cookies.page.what.p1":
+      "Cookies are small files that your browser stores when you visit a website. They allow the site to remember information between pages and visits.",
+    "cookies.page.what.p2":
+      "This site does not use advertising, profiling or social-media cookies.",
+    "cookies.page.which.title": "Which cookies does this site use?",
+    "cookies.page.which.p1":
+      "Only Google Analytics 4 (Google Ireland Limited), with measurement ID G-0LD2ZWS5QC, to measure visits in aggregate: pages viewed, traffic source and device type.",
+    "cookies.page.which.p2":
+      "The cookies are _ga and _ga_<ID>. They are first-party, last up to 2 years, and are not installed until you accept.",
+    "cookies.page.which.p3":
+      "If you reject, Google Analytics is not loaded and no analytics cookie is installed.",
+    "cookies.page.consent.title":
+      "How do I accept, reject or change my choice?",
+    "cookies.page.consent.p1":
+      "The notice appears the first time you visit the site. Accept and Reject have the same style and are equally easy to use. You can change your choice at any time with “Cookie settings” in the footer.",
+    "cookies.page.consent.p2":
+      "If you reject after having accepted, your rejection is saved, the _ga and _ga_* cookies are deleted and the page reloads so that Google Analytics stops loading.",
+    "cookies.page.delete.title":
+      "How do I delete cookies in my browser?",
+    "cookies.page.delete.p1":
+      "You can delete or block cookies in your browser settings (Chrome, Firefox, Safari, Edge). Blocking them does not prevent you from browsing this site; only anonymous measurement is lost.",
+    "cookies.page.google.p1":
+      "Google may process usage data under its own privacy policy.",
+    "cookies.page.google.link": "How Google uses cookies",
+    "cookies.page.updated":
+      "Last updated: November 2026. Data controller: Carlos Zubeldia — carloszubeldiavilchez@gmail.com.",
 
     /* Proyecto */
     "project.back": "All work",
@@ -327,6 +358,37 @@ const STRINGS = {
       "Uso cookies de analítica para mejorar la web.\n¿Las aceptas?",
     "cookies.accept": "Aceptar",
     "cookies.reject": "Rechazar",
+    "cookies.more": "Más información",
+    "cookies.page.title": "Política de cookies",
+    "cookies.page.lead":
+      "Esta web solo usa cookies de analítica y únicamente si las aceptas. Aquí tienes qué se guarda, para qué y cómo cambiar tu elección.",
+    "cookies.page.what.title": "¿Qué son las cookies?",
+    "cookies.page.what.p1":
+      "Las cookies son archivos pequeños que el navegador guarda cuando visitas una web. Permiten recordar información entre páginas y visitas.",
+    "cookies.page.what.p2":
+      "Esta web no usa cookies de publicidad, de perfilado ni de redes sociales.",
+    "cookies.page.which.title": "¿Qué cookies usa esta web?",
+    "cookies.page.which.p1":
+      "Solo Google Analytics 4 (Google Ireland Limited), con el identificador de medición G-0LD2ZWS5QC, para medir las visitas de forma agregada: páginas vistas, origen del tráfico y tipo de dispositivo.",
+    "cookies.page.which.p2":
+      "Las cookies son _ga y _ga_<ID>. Son de primera parte, duran hasta 2 años y no se instalan hasta que aceptas.",
+    "cookies.page.which.p3":
+      "Si rechazas, Google Analytics no se carga y no se instala ninguna cookie de analítica.",
+    "cookies.page.consent.title":
+      "¿Cómo acepto, rechazo o cambio mi elección?",
+    "cookies.page.consent.p1":
+      "El aviso aparece la primera vez que visitas la web. Aceptar y Rechazar tienen el mismo estilo y son igual de fáciles de usar. Puedes cambiar tu elección cuando quieras con «Configurar cookies», en el pie de página.",
+    "cookies.page.consent.p2":
+      "Si rechazas después de haber aceptado, se guarda tu rechazo, se borran las cookies _ga y _ga_* y la página se recarga para que Google Analytics deje de cargarse.",
+    "cookies.page.delete.title":
+      "¿Cómo borro las cookies de mi navegador?",
+    "cookies.page.delete.p1":
+      "Puedes borrar o bloquear las cookies desde los ajustes de tu navegador (Chrome, Firefox, Safari, Edge). Bloquearlas no impide navegar por esta web; solo se pierde la medición anónima.",
+    "cookies.page.google.p1":
+      "Google puede tratar los datos de uso según su propia política de privacidad.",
+    "cookies.page.google.link": "Cómo utiliza Google las cookies",
+    "cookies.page.updated":
+      "Última actualización: noviembre de 2026. Responsable: Carlos Zubeldia — carloszubeldiavilchez@gmail.com.",
 
     /* Proyecto */
     "project.back": "Todos los proyectos",

@@ -1899,10 +1899,29 @@ h4 {
 }
 
 .cookies__text {
-  margin: 0 0 1rem;
+  margin: 0 0 0.45rem;
   /* El salto que va antes de la pregunta; sin esto el navegador lo convierte
      en un espacio. Mismo mecanismo que el reclamo del hero. */
   white-space: pre-line;
+}
+
+/* Enlace a la politica de cookies. Va en tinta (15:1 sobre blanco) y
+   subrayado, para que se distinga del texto sin depender del color. */
+.cookies__more {
+  margin: 0 0 1rem;
+  font-size: var(--fs-small);
+}
+
+.cookies__more a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.cookies__more a:hover {
+  color: #000000;
+  text-decoration-thickness: 2px;
 }
 
 /* Botones centrados en la caja. */
@@ -1913,28 +1932,16 @@ h4 {
   justify-content: center;
 }
 
-/* Los dos botones, con la altura comoda de pulsar (44 px). */
+/* Los dos botones son el MISMO botón: altura y ancho mínimos iguales y el
+   estilo base (.btn), negro con texto blanco (21:1). Antes aceptar iba en
+   naranja y rechazar solo con borde; la AEPD pide que rechazar sea igual de
+   fácil, y el naranja con texto blanco no llegaba a 4,5:1. */
 .cookies .btn {
   min-height: 44px;
+  min-width: 9rem;
+  justify-content: center;
   font-size: var(--fs-small);
   font-weight: 500;
-}
-
-/* Aceptar y rechazar, con EL MISMO estilo: la AEPD pide que rechazar sea igual
-   de facil que aceptar, y un boton solo con borde parece secundario. Los dos
-   van rellenos en naranja y comparten el mismo hover. */
-.cookies__accept,
-.cookies__reject {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
-}
-
-.cookies__accept:hover,
-.cookies__reject:hover {
-  background: #ffffff;
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 /* En movil, los dos botones a lo ancho y uno encima del otro. */
@@ -1974,6 +1981,35 @@ h4 {
 
 .footer__links a:hover {
   color: var(--accent);
+}
+
+/* «Configurar cookies» es un botón, pero se ve como un enlace del pie. */
+.footer__links button {
+  padding: 0;
+  letter-spacing: inherit;
+  text-align: left;
+}
+
+/* El enlace a la política y el botón de configuración comparten un hover
+   accesible: tinta (15:1 sobre blanco) y subrayado. El naranja a 14 px no
+   llega a 4,5:1. */
+.footer__links a[href="cookies.html"]:hover,
+.footer__links button:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* Enlaces de la política de cookies: siempre subrayados, en tinta. Se acota al
+   texto de la política para no tocar los enlaces del bloque de contacto. */
+.legal .prose-section a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.legal .prose-section a:hover {
+  text-decoration-thickness: 2px;
 }
 
 .to-top {
