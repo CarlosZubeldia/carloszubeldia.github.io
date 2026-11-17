@@ -53,7 +53,9 @@ const PROJECTS = [
        la tarjeta de Borealis). Se muestra en la home y en la página de
        proyectos. */
     cardLogo: IMG + "rockbikes-logo.svg",
-    hero: IMG + "rockbikes-hero.webp",
+    /* Portada de la pagina del proyecto. Es una foto DISTINTA de la tarjeta:
+       el rider se ve mas cerca y con mas contraste. La tarjeta no se toca. */
+    hero: IMG + "rockbikes-hero-trail.webp",
     link: "https://carloszubeldia.com/RockBikes/index.html",
     facts: [
       { label: { en: "My role", es: "Mi rol" }, value: { en: "Product Designer", es: "Product Designer" } },

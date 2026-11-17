@@ -7719,6 +7719,52 @@ body:has(.about-section) .contact {
   aspect-ratio: 228 / 24;
 }
 
+/* --- La cortina de la portada de Rock Bikes ------------------------------
+   La foto de portada lleva el cielo y los reflejos del bokeh justo detrás del
+   texto blanco. Con la cortina genérica (120deg, de 0,5 a 0,05) la etiqueta se
+   quedaba en 3,6:1 en sus zonas claras, la entradilla bajaba a 2,5:1 y el
+   titular a 1,6:1 sobre el sol de la derecha: las letras se deshacían justo
+   donde más claro es el fondo.
+
+   Aquí va en DOS capas que oscurecen solo lo que hay que oscurecer:
+     1) un radial anclado al bloque de texto (izquierda, tercio superior), que
+        se apaga antes de llegar al rider y al sol;
+     2) un degradado de abajo arriba para la banda del titular.
+   Son capas del MISMO fondo (`background` con dos gradientes), no un elemento
+   nuevo: no cuesta ni un nodo más de DOM.
+
+   Medido con `_medicion/_buscar-cortina.py`, que compone el fondo real (foto
+   recortada con `cover` + cortina) y calcula el contraste WCAG de cada línea:
+   a 1440 px la etiqueta queda en 12,3:1 y la entradilla en 12,5:1 (peores
+   zonas 10,7 y 6,8) y el titular en 10,2:1 (peor 3,6). AA de sobra. */
+.project--rockbikes .phero__scrim {
+  background: radial-gradient(
+      ellipse 105% 82% at 0% 34%,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.55) 42%,
+      rgba(0, 0, 0, 0.18) 72%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 32%, rgba(0, 0, 0, 0) 58%);
+}
+
+/* En móvil y tablet el recorte de la foto es otro (se ve la franja central,
+   con el bokeh mucho más grande) y la entradilla va en una sola línea que
+   acaba sobre el cielo: el radial tiene que ser más ancho y más opaco, si no
+   la cola de la frase se pierde. */
+@media (max-width: 1024px) {
+  .project--rockbikes .phero__scrim {
+    background: radial-gradient(
+        ellipse 130% 90% at 0% 36%,
+        rgba(0, 0, 0, 0.86) 0%,
+        rgba(0, 0, 0, 0.66) 48%,
+        rgba(0, 0, 0, 0.22) 78%,
+        rgba(0, 0, 0, 0.02) 100%
+      ),
+      linear-gradient(to top, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.26) 38%, rgba(0, 0, 0, 0) 64%);
+  }
+}
+
 /* --- Tarjetas de la rejilla de proyectos, alineadas ----------------------
    En `work.html` los textos tienen largos distintos: con el cuerpo en fila,
    el botón cabía al lado en una tarjeta y saltaba debajo en otra, y las
