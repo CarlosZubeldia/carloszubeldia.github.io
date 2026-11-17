@@ -10,7 +10,7 @@
     /* Conserva los enlaces antiguos del tipo project.html?id=ascaso */
     (function () {
       var id = new URLSearchParams(location.search).get("id");
-      var known = ["rockbikes", "ascaso", "altessia", "edusport"];
+      var known = ["rockbikes", "wizard", "ascaso", "altessia", "edusport"];
       location.replace(known.indexOf(id) > -1 ? id + ".html" : "work.html");
     })();
   </script>

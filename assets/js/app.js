@@ -273,7 +273,14 @@
 
         const key = btn.getAttribute("data-filter");
         $$(".project-card", grid).forEach((card) => {
-          card.hidden = !(key === "all" || card.getAttribute("data-category") === key);
+          const tags = (card.getAttribute("data-tags") || "")
+            .split(/\s+/)
+            .filter(Boolean);
+          card.hidden = !(
+            key === "all" ||
+            card.getAttribute("data-category") === key ||
+            tags.indexOf(key) > -1
+          );
         });
 
         Reveal.refresh();

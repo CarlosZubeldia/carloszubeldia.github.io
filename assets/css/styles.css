@@ -7693,12 +7693,19 @@ body:has(.about-section) .contact {
     transform: scale(1.3);
   }
 
-  /* Rock Bikes: las cajas de la home son hermanas dentro de
-     `.psection__full`, así que no heredan el margen de
-     `.psection__body > .pshowcase + .pshowcase` y en móvil se pegaban. */
-  .project--rockbikes #home .pshowcase + .pshowcase {
-    margin-top: 2rem;
+  /* En las cajas de LA HOME, las dos capturas iban lado a lado y quedaban
+     diminutas. En móvil se apilan en vertical y ocupan todo el ancho. */
+  .project--rockbikes #home .pshowcase__grid--2 {
+    grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* --- Separación de las cajas de LA HOME de Rock Bikes --------------------
+   Son hermanas dentro de `.psection__full`, así que no heredan el margen de
+   `.psection__body > .pshowcase + .pshowcase` y se pegaban entre sí en todos
+   los tamaños. Se les da el mismo aire que a las cajas equivalentes. */
+.project--rockbikes #home .pshowcase + .pshowcase {
+  margin-top: clamp(2rem, 3.4vw, 3.1rem);
 }
 
 /* --- El logo de Rock Bikes escala con la tarjeta -------------------------
@@ -7731,4 +7738,287 @@ body:has(.about-section) .contact {
 
 .work-grid .project-card__cta {
   align-self: flex-start;
+}
+
+/* ==========================================================================
+   CASO WIZARD
+   --------------------------------------------------------------------------
+   Componentes que solo usa esta página: la tabla hallazgo/decisión, los
+   niveles del índice, el flujo de seis pasos y la nota al pie. Todo va
+   acotado a `.project--wizard` para no tocar los demás proyectos (el `pnote`
+   de Altessia, por ejemplo, lleva su punto de color y no debe heredar esto).
+   ========================================================================== */
+
+/* El hero es una composición de capturas: el velo oscurece solo la izquierda,
+   donde va el texto, para no tapar la interfaz. */
+.project--wizard .phero__scrim {
+  background: linear-gradient(
+    100deg,
+    rgba(4, 22, 54, 0.72) 0%,
+    rgba(4, 22, 54, 0.35) 38%,
+    rgba(4, 22, 54, 0) 62%
+  );
+}
+
+/* Tabla de dos columnas: hallazgo → decisión, criterio → aplicación. */
+.project--wizard .ptable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.project--wizard .ptable caption {
+  text-align: left;
+  font-size: var(--fs-micro);
+  color: var(--muted);
+  padding-bottom: 0.75rem;
+}
+
+.project--wizard .ptable th,
+.project--wizard .ptable td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1rem 1.25rem 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.project--wizard .ptable thead th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border-bottom-color: var(--line-strong);
+}
+
+.project--wizard .ptable tbody th {
+  font-weight: 500;
+  color: var(--ink);
+  width: 45%;
+}
+
+.project--wizard .ptable td {
+  color: var(--ink-2);
+}
+
+.project--wizard .ptable--code tbody th {
+  width: 7rem;
+  font-family: var(--font-display);
+}
+
+/* Niveles del índice: icono + sigla + significado. El color nunca va solo. */
+.project--wizard .plevels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project--wizard .plevel {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-box);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.project--wizard .plevel__icon {
+  height: 44px;
+  width: auto;
+  align-self: flex-start;
+}
+
+.project--wizard .plevel__code {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1;
+  margin-top: 0.5rem;
+}
+
+.project--wizard .plevel__name {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.project--wizard .plevel__desc {
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+
+/* Flujo: pasos numerados en una fila. */
+.project--wizard .pflow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.project--wizard .pflow li {
+  counter-increment: step;
+  border-top: 1px solid var(--line-strong);
+  padding: 1rem 1rem 1.25rem 0;
+}
+
+.project--wizard .pflow li::before {
+  content: counter(step, decimal-leading-zero) ".";
+  display: block;
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.project--wizard .pflow strong {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.project--wizard .pflow span {
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+
+/* Listas dentro de las cajas de "original vs. 2026". El reset global quita
+   la viñeta a todos los `ul`, así que aquí se recupera. */
+.project--wizard .pboxes__list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  display: grid;
+  gap: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+
+/* En tablet el CSS base quita el tope de lectura de la entradilla y, con esta
+   portada, el texto blanco se metía encima de las capturas claras y
+   desaparecía. Se mantiene el ancho de lectura dentro de la zona oscura. */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .project--wizard .phero__tagline {
+    max-width: 30ch;
+  }
+}
+
+/* Captura móvil centrada junto a la de escritorio. */
+.project--wizard .pshowcase__grid--wm {
+  grid-template-columns: minmax(0, 3.2fr) minmax(0, 1fr);
+}
+
+/* Las cajas de "La interfaz" van en el azul de la portada, no en negro: así
+   el bloque pertenece al mismo mundo visual que el hero. Es el tono dominante
+   de `wizard-hero.webp` (#0a4daf). */
+.project--wizard .pshowcase {
+  background: #0a4daf;
+}
+
+/* Detrás de cada captura, un azul algo más oscuro que el fondo (antes era el
+   gris #262626 de las cajas negras). */
+.project--wizard .pshowcase__grid img,
+.project--wizard .pshowcase__grid video {
+  background: #083f91;
+}
+
+/* Aire entre las cajas oscuras de "La interfaz". Al ir todas dentro de
+   `.psection__full`, la regla general `.psection__body > .pshowcase +
+   .pshowcase` no las alcanza y se tocaban. Se les da el mismo hueco que
+   tendrían en secciones distintas. */
+.project--wizard .psection__full > .pshowcase + .pshowcase {
+  margin-top: clamp(2rem, 3.4vw, 3.1rem);
+}
+
+/* Nota al pie de la tabla de research. */
+.project--wizard .pnote {
+  font-size: var(--fs-micro);
+  color: var(--muted);
+  margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .project--wizard .plevels,
+  .project--wizard .pflow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Móvil: las capturas del hero quedan detrás del texto. Se desplazan a la
+   derecha y el velo cubre todo el ancho para mantener el contraste. */
+@media (max-width: 640px) {
+  .project--wizard .phero__media img {
+    object-position: 78% 50%;
+  }
+
+  .project--wizard .phero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(4, 22, 54, 0.82) 0%,
+      rgba(4, 22, 54, 0.55) 55%,
+      rgba(4, 22, 54, 0.7) 100%
+    );
+  }
+
+  .project--wizard .plevels,
+  .project--wizard .pflow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--wizard .pshowcase__grid--wm {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--wizard .pshowcase__grid--wm img:last-child {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  /* La tabla se apila: cada fila queda como hallazgo (negrita) y decisión
+     debajo. La cabecera se oculta a la vista pero sigue para lectores de
+     pantalla. */
+  .project--wizard .ptable tbody th {
+    width: auto;
+  }
+
+  .project--wizard .ptable,
+  .project--wizard .ptable tbody,
+  .project--wizard .ptable tr,
+  .project--wizard .ptable th,
+  .project--wizard .ptable td {
+    display: block;
+  }
+
+  .project--wizard .ptable caption {
+    display: block;
+    width: auto;
+  }
+
+  .project--wizard .ptable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .project--wizard .ptable tbody th {
+    padding-bottom: 0.25rem;
+    border-bottom: 0;
+  }
+
+  .project--wizard .ptable td {
+    padding-top: 0;
+  }
 }

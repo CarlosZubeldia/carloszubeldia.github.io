@@ -47,6 +47,8 @@ const PROJECTS = [
     /* Vídeo ambiental de la tarjeta: en bucle infinito. */
     coverVideoLoop: true,
     cardTitleUpper: true,
+    /* Etiqueta de filtro de la página de proyectos. */
+    tags: [{ key: "ia", label: { en: "AI", es: "IA" } }],
     /* Logotipo de la marca, centrado sobre la miniatura (mismo componente que
        la tarjeta de Borealis). Se muestra en la home y en la página de
        proyectos. */
@@ -142,17 +144,14 @@ const PROJECTS = [
           {
             t: "media",
             full: true,
-            video: "assets/video/rockbikes-scroll.mp4",
-            src: IMG + "rockbikes-scroll-poster.jpg",
-            /* Con controles y sin autoplay: es un recorrido largo y lo decide
-               ver quien mira. Las medidas reservan el hueco al cargar. */
-            videoControls: true,
-            videoWidth: 1366,
-            videoHeight: 768,
-            caption: {
-              en: "Scroll through the home page (sped up)",
-              es: "Recorrido por la home (acelerado)",
-            },
+            video: "assets/video/rockbikes-result.mp4",
+            src: IMG + "rockbikes-result-poster.jpg",
+            /* Se reproduce solo al acercarse a la sección: `lazy` deja el
+               vídeo sin `autoplay` y app.js le da al play cuando entra en
+               pantalla. Sin controles y sin pie de foto. */
+            lazy: true,
+            videoWidth: 1920,
+            videoHeight: 1010,
           },
         ],
       },
@@ -422,6 +421,645 @@ const PROJECTS = [
             v: {
               en: "This project shows I can take a design all the way to a working product and work with developers using the same language.",
               es: "Este proyecto demuestra que puedo llevar un diseño hasta un producto que funciona y trabajar con desarrollo hablando el mismo idioma.",
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  /* -------------------------------------------------------------- WIZARD */
+  /* Herramienta interna para reutilizar contenido formativo. El diseño y el
+     contenido llegaron en `wizard-portfolio.zip`; la página se genera con los
+     bloques nuevos `table`, `levels`, `flow` y `pnote`. Va en segunda posición,
+     detrás de Rock Bikes. */
+  {
+    id: "wizard",
+    layout: "rich",
+    title: "Wizard",
+    /* En el diseño el titular del hero va en minúsculas, tal cual. */
+    heroTitle: "wizard",
+    category: { en: "Internal tool / EdTech", es: "Herramienta interna / EdTech" },
+    /* Aparece también en el filtro Edtech, además de Herramienta interna. */
+    tags: [{ key: "edtech", label: { en: "Edtech", es: "Edtech" } }],
+    tagline: {
+      en: "An index builder so writers reuse course content instead of writing it again.",
+      es: "Un creador de índices para reutilizar contenido formativo en lugar de volver a escribirlo.",
+    },
+    heroTagline: {
+      en: "An index builder so writers reuse course content instead of writing it again.",
+      es: "Un creador de índices para que el equipo de redacción reutilice contenido formativo en lugar de volver a escribirlo.",
+    },
+    year: "2026",
+    cover: IMG + "wizard-hero.webp",
+    hero: IMG + "wizard-hero.webp",
+    facts: [
+      { label: { en: "My role", es: "Mi rol" }, value: { en: "Product Designer", es: "Product Designer" } },
+      {
+        label: { en: "Status", es: "Estado" },
+        value: { en: "Validated prototype", es: "Prototipo validado" },
+      },
+      { label: { en: "Tools", es: "Herramientas" }, value: { en: "Figma · AI", es: "Figma · IA" } },
+    ],
+    skills: [
+      { en: "User research", es: "Investigación con usuarios" },
+      { en: "UX flow", es: "Flujo de usuario" },
+      { en: "UI Design", es: "Diseño de interfaz" },
+      { en: "Logo and icons", es: "Logo e iconos" },
+      { en: "Accessibility", es: "Accesibilidad" },
+      { en: "Internal tools", es: "Herramientas internas" },
+    ],
+    intro: {
+      en: [
+        "Writers kept building syllabuses that already existed in other courses. Wizard is an internal tool to find, compare and reuse that content, and to review the index before publishing it.",
+        "I started from a very early proposal, interviewed the content team and designed the complete flow. The process was validated with a prototype, but the project was paused by budget cuts before reaching production.",
+        "In 2026 I updated the interface with the help of AI. On this page I separate what comes from the original project from what is new.",
+      ],
+      es: [
+        "El equipo de redacción volvía a crear temarios que ya existían en otros cursos. Wizard es una herramienta interna para encontrar, comparar y reutilizar ese contenido, y revisar el índice antes de publicarlo.",
+        "Partí de una propuesta muy inicial, entrevisté al equipo de contenidos y diseñé el flujo completo. El proceso se validó con un prototipo, pero el proyecto se paralizó por recortes antes de llegar a producción.",
+        "En 2026 actualicé la interfaz con ayuda de IA. En esta página separo lo que viene del proyecto original de lo que es nuevo.",
+      ],
+    },
+
+    sections: [
+      /* ------------------------------------------ RETO Y MI PARTE, EN CAJAS -- */
+      {
+        id: "challenge",
+        /* Solo cajas a todo el ancho: no lleva columna de texto. */
+        noBody: true,
+        blocks: [
+          {
+            t: "boxes",
+            full: true,
+            items: [
+              {
+                theme: "soft",
+                label: { en: "Challenge", es: "El reto" },
+                ps: [
+                  {
+                    en: "Much of the work was lost sifting through content, because the same topic doesn't work the same in every context. Protocol in a hotel isn't protocol in a public institution, and vocabulary changes between Spain and Latin America even though it's all Spanish.",
+                    es: "Gran parte del proceso se perdía cribando contenido, porque un mismo tema no sirve igual en todos los contextos. El protocolo en un hotel no es el de una institución pública, y el vocabulario cambia entre España y LATAM aunque todo esté en español.",
+                  },
+                  {
+                    en: "According to the writers, building an average index took around 6 hours.",
+                    es: "Según el equipo de redacción, montar un índice medio llevaba unas 6 horas.",
+                  },
+                ],
+              },
+              {
+                theme: "soft",
+                label: { en: "My part", es: "Mi parte" },
+                ps: [
+                  {
+                    en: "Research, the complete flow, the interface, the logo and the level icons.",
+                    es: "Research, flujo completo, interfaz, logo e iconos de los niveles.",
+                  },
+                  {
+                    en: "The initial idea wasn't mine, and the original illustrations came from a stock library with minimal editing.",
+                    es: "La idea inicial no fue mía, y las ilustraciones originales salieron de un banco de imágenes con una edición mínima.",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------------ RESEARCH ----- */
+      {
+        id: "research",
+        label: { en: "Research", es: "Research" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "I interviewed two writers and the head of the content department twice: first to understand how they worked, then to find their real needs. Each finding became a design decision.",
+              es: "Entrevisté a dos redactores y a la responsable del departamento de contenidos en dos momentos: primero, para entender cómo trabajaban; después, para detectar sus necesidades reales. Cada hallazgo se convirtió en una decisión de diseño.",
+            },
+          },
+          {
+            t: "table",
+            full: true,
+            caption: { en: "From finding to decision", es: "Del hallazgo a la decisión" },
+            head: [
+              { en: "What I found", es: "Lo que descubrí" },
+              { en: "Design decision", es: "Decisión de diseño" },
+            ],
+            rows: [
+              {
+                th: {
+                  en: "The topic isn't enough: the area and the context of use matter.",
+                  es: "El tema no basta: importan el área y el contexto de uso.",
+                },
+                td: {
+                  en: "Area and location filters from the very start of the search.",
+                  es: "Filtros por área y ubicación desde el inicio de la búsqueda.",
+                },
+              },
+              {
+                th: {
+                  en: "Vocabulary changes depending on the audience.",
+                  es: "El vocabulario cambia según el público.",
+                },
+                td: {
+                  en: "Location and audience visible on every index.",
+                  es: "Ubicación y público visibles en cada índice.",
+                },
+              },
+              {
+                th: {
+                  en: "With two similar syllabuses, a first read isn't enough to decide.",
+                  es: "Con dos temarios parecidos, una primera lectura no basta para decidir.",
+                },
+                td: {
+                  en: "Favourites to keep candidates and a preview without leaving the index.",
+                  es: "Favoritos para guardar candidatos y previsualización sin salir del índice.",
+                },
+              },
+              {
+                th: {
+                  en: "They want to know how many images and videos can be reused.",
+                  es: "Interesa saber cuánta imagen y vídeo se puede aprovechar.",
+                },
+                td: {
+                  en: "Image and video count on every result.",
+                  es: "Recuento de imágenes y vídeos en cada resultado.",
+                },
+              },
+              {
+                th: {
+                  en: "Several people review the index before publishing it.",
+                  es: "Varias personas revisan el índice antes de publicarlo.",
+                },
+                td: {
+                  en: "A change log with person, time and action, similar to Notion's.",
+                  es: "Registro de cambios con persona, hora y acción, parecido al de Notion.",
+                },
+              },
+            ],
+          },
+          {
+            t: "pnote",
+            full: true,
+            v: {
+              en: "Favourites, preview and the change log were the parts that changed most thanks to the interviews.",
+              es: "Favoritos, previsualización y registro de cambios fueron las partes que más cambiaron gracias a las entrevistas.",
+            },
+          },
+        ],
+      },
+
+      /* ------------------------------------------------ MODELO DE CONTENIDO */
+      {
+        id: "model",
+        theme: "soft",
+        label: { en: "Content model", es: "Modelo de contenido" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "A project groups the courses of one commission, and each course has its own four-level index. The icons are geometric: each level breaks down into smaller pieces, so the hierarchy reads at a glance. They always come with their text label.",
+              es: "Un proyecto agrupa los cursos de un mismo encargo, y cada curso tiene su índice con cuatro niveles. Los iconos son geométricos: cada nivel se descompone en piezas más pequeñas, así que la jerarquía se entiende de un vistazo. Siempre van con su etiqueta de texto.",
+            },
+          },
+          {
+            t: "levels",
+            full: true,
+            items: [
+              {
+                icon: IMG + "wizard-afo.svg",
+                code: "AFO",
+                name: { en: "Training action", es: "Acción formativa" },
+                desc: { en: "The whole course.", es: "El curso entero." },
+              },
+              {
+                icon: IMG + "wizard-mod.svg",
+                code: "MOD",
+                name: { en: "Module", es: "Módulo" },
+                desc: { en: "Like a subject.", es: "Como una asignatura." },
+              },
+              {
+                icon: IMG + "wizard-udi.svg",
+                code: "UDI",
+                name: { en: "Teaching unit", es: "Unidad didáctica" },
+                desc: { en: "A unit inside the module.", es: "Una unidad dentro del módulo." },
+              },
+              {
+                icon: IMG + "wizard-epi.svg",
+                code: "EPI",
+                name: { en: "Heading", es: "Epígrafe" },
+                desc: {
+                  en: "The smallest unit: a title or a text box.",
+                  es: "La unidad mínima: título o caja de texto.",
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ---------------------------------------------------------- EL FLUJO -- */
+      {
+        id: "flow",
+        label: { en: "The flow", es: "El flujo" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "From the day's work to a published index, in six steps.",
+              es: "Del trabajo del día a un índice publicado, en seis pasos.",
+            },
+          },
+          {
+            t: "flow",
+            full: true,
+            items: [
+              {
+                title: "Dashboard",
+                v: {
+                  en: "Recent projects, deadlines, messages and FAQs.",
+                  es: "Proyectos recientes, entregas, mensajes y preguntas frecuentes.",
+                },
+              },
+              {
+                title: { en: "Projects by status", es: "Proyectos por estado" },
+                v: {
+                  en: "Inbox, Blocked, In progress, Proposals, Validated and Deleted.",
+                  es: "Bandeja de entrada, Bloqueados, En curso, Propuestas, Validados y Eliminados.",
+                },
+              },
+              {
+                title: { en: "Project", es: "Proyecto" },
+                v: {
+                  en: "The courses of the commission and the status of each index.",
+                  es: "Los cursos del encargo y el estado de cada índice.",
+                },
+              },
+              {
+                title: { en: "Index", es: "Índice" },
+                v: {
+                  en: "Search and filter content, compare it, add it and order the structure.",
+                  es: "Buscar y filtrar contenido, compararlo, añadirlo y ordenar la estructura.",
+                },
+              },
+              {
+                title: { en: "Review", es: "Revisión" },
+                v: {
+                  en: "Checks and approvals before publishing.",
+                  es: "Comprobaciones y aprobaciones antes de publicar.",
+                },
+              },
+              {
+                title: { en: "Publishing", es: "Publicación" },
+                v: { en: "One last confirmation.", es: "Una última confirmación." },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------------ LA INTERFAZ -- */
+      {
+        id: "screens",
+        label: { en: "The interface", es: "La interfaz" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "2026 version of the prototype. All content, names and projects are fictitious.",
+              es: "Versión de 2026 del prototipo. Los contenidos, nombres y proyectos son ficticios.",
+            },
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Build the index", es: "Montar el índice" },
+            v: {
+              en: "Search on the left, structure on the right. Each result shows its area, location, length and how many images and videos it brings. Favourites and preview help to decide between two similar syllabuses.",
+              es: "Búsqueda a la izquierda y estructura a la derecha. Cada resultado muestra su área, ubicación, duración y cuántas imágenes y vídeos trae. Favoritos y previsualización ayudan a decidir entre dos temarios parecidos.",
+            },
+            /* La captura de móvil va al lado de la de escritorio, no debajo. */
+            grid: "wm",
+            images: [
+              {
+                src: IMG + "wizard-index.webp",
+                alt: "Index screen: content search with filters and results on the left, course structure with AFO, MOD, UDI and EPI levels on the right",
+              },
+              {
+                src: IMG + "wizard-m-index.webp",
+                alt: "Index structure on mobile",
+              },
+            ],
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "The + menu", es: "El menú +" },
+            v: {
+              en: "Inspired by Notion: from any row you create a level, insert your own documents, images or videos, or reuse content from the repository, without leaving the index.",
+              es: "Inspirado en Notion: desde cada fila se crea un nivel, se insertan documentos, imágenes o vídeos propios, o se reutiliza contenido del repositorio, sin salir del índice.",
+            },
+            images: [
+              {
+                src: IMG + "wizard-menu.webp",
+                alt: "Open + menu on a row of the index with the options Create, Insert own content and Reuse from the repository",
+              },
+            ],
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Dashboard and board", es: "Dashboard y tablero" },
+            v: {
+              en: "The dashboard gathers what's pending. On the board, each status keeps its colour but always shows its name, and every card can be moved by dragging or with its Status menu.",
+              es: "El dashboard reúne lo pendiente. En el tablero, cada estado conserva su color pero siempre lleva su nombre, y cada tarjeta se mueve arrastrando o con su menú Estado.",
+            },
+            images: [
+              {
+                src: IMG + "wizard-dashboard.webp",
+                alt: "Dashboard with recent projects, messages, calendar and frequently asked questions",
+              },
+              {
+                src: IMG + "wizard-board.webp",
+                alt: "Projects board with six status columns",
+              },
+            ],
+          },
+          {
+            t: "showcase",
+            full: true,
+            title: { en: "Review before publishing", es: "Revisión antes de publicar" },
+            v: {
+              en: "What's missing is visible before publishing: content without an assignment, images without alt text, videos without subtitles and pending approvals. Each error explains its reason.",
+              es: "Lo que falta se ve antes de publicar: contenido sin asignar, imágenes sin texto alternativo, vídeos sin subtítulos y aprobaciones pendientes. Cada error explica su motivo.",
+            },
+            images: [
+              {
+                src: IMG + "wizard-review.webp",
+                alt: "Review screen with checks marked Correct or Pending and the reviewers' approvals",
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------ QUÉ CAMBIÓ EN 2026 -- */
+      {
+        id: "decisions",
+        theme: "soft",
+        label: { en: "What changed in 2026", es: "Qué cambió en 2026" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "The update simplifies editing the index and makes visible what's missing before publishing.",
+              es: "La actualización simplifica la edición del índice y hace visible lo que falta antes de publicar.",
+            },
+          },
+          {
+            t: "cards",
+            full: true,
+            cols: 2,
+            items: [
+              {
+                num: "01.",
+                title: { en: "Fewer levels", es: "Menos niveles" },
+                kind: "text",
+                ps: [
+                  {
+                    en: "I removed UFO, a level that was useful internally but added nothing for whoever built the index. In a real product, I would check it first with development and with users.",
+                    es: "Eliminé UFO, un nivel con utilidad interna que no aportaba nada a quien montaba el índice. En un producto real, lo comprobaría antes con desarrollo y con usuarias.",
+                  },
+                ],
+              },
+              {
+                num: "02.",
+                title: { en: "+ menu and own content", es: "Menú + y contenido propio" },
+                kind: "text",
+                ps: [
+                  {
+                    en: "Create, insert and reuse from the same row. Besides reusing, you can now add your own documents, images and videos.",
+                    es: "Crear, insertar y reutilizar desde la misma fila. Además de reutilizar, ahora se pueden añadir documentos, imágenes y vídeos propios.",
+                  },
+                ],
+              },
+              {
+                num: "03.",
+                title: { en: "A cleaner interface", es: "Interfaz más limpia" },
+                kind: "text",
+                ps: [
+                  {
+                    en: "Row actions appear on hover or when reaching the row with the keyboard, and they're always visible on touch screens.",
+                    es: "Las acciones de cada fila aparecen al pasar el ratón o al llegar con el teclado, y siempre en pantallas táctiles.",
+                  },
+                ],
+              },
+              {
+                num: "04.",
+                title: { en: "Colour and text", es: "Color y texto" },
+                kind: "text",
+                ps: [
+                  {
+                    en: "The board keeps its status colours, with the status name always written. Levels follow the same rule: icon, colour and acronym.",
+                    es: "El tablero mantiene los colores de cada estado, con su nombre siempre escrito. Los niveles siguen la misma regla: icono, color y sigla.",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ---------------------------------------------------- ACCESIBILIDAD -- */
+      {
+        id: "accessibility",
+        label: { en: "Accessibility", es: "Accesibilidad" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "Design target: WCAG 2.2 AA. It hasn't been audited or tested with a screen reader yet.",
+              es: "Objetivo de diseño: WCAG 2.2 AA. Aún no tiene auditoría ni pruebas con lector de pantalla.",
+            },
+          },
+          {
+            t: "table",
+            full: true,
+            variant: "code",
+            caption: {
+              en: "WCAG criteria applied in the prototype",
+              es: "Criterios WCAG aplicados en el prototipo",
+            },
+            head: [
+              { en: "Criterion", es: "Criterio" },
+              { en: "How it applies", es: "Aplicación" },
+            ],
+            rows: [
+              {
+                th: "1.1.1",
+                td: {
+                  en: "Alt text is required on inserted images.",
+                  es: "Texto alternativo obligatorio en las imágenes insertadas.",
+                },
+              },
+              {
+                th: "1.2.2",
+                td: {
+                  en: "Warning about videos without subtitles before publishing.",
+                  es: "Aviso de vídeos sin subtítulos antes de publicar.",
+                },
+              },
+              {
+                th: "1.4.1",
+                td: {
+                  en: "Levels and statuses carry text, not just colour.",
+                  es: "Niveles y estados con texto, no solo color.",
+                },
+              },
+              {
+                th: "2.5.7",
+                td: {
+                  en: "Everything draggable has an alternative with a menu or buttons.",
+                  es: "Todo lo arrastrable tiene alternativa con menú o botones.",
+                },
+              },
+              {
+                th: "3.3.1",
+                td: {
+                  en: "Errors in text, with the reason.",
+                  es: "Errores en texto y con el motivo.",
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* --------------------------------------------------- CÓMO USÉ LA IA -- */
+      {
+        id: "ai",
+        theme: "soft",
+        label: { en: "How I used AI", es: "Cómo usé la IA" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "I used AI to rebuild the prototype and explore improvements. The product judgement and the corrections were mine. Three real examples from this revision:",
+              es: "Usé IA para reconstruir el prototipo y explorar mejoras. El criterio de producto y las correcciones fueron míos. Tres ejemplos reales de esta revisión:",
+            },
+          },
+          {
+            t: "cols",
+            full: true,
+            cols: 3,
+            items: [
+              {
+                title: { en: "Hierarchy", es: "Jerarquía" },
+                v: {
+                  en: "The AI inferred the levels and treated each project as a single course. I corrected it with how it really works: a project can have several courses.",
+                  es: "La IA dedujo los niveles y puso cada proyecto como un solo curso. Lo corregí con el funcionamiento real: un proyecto puede tener varios cursos.",
+                },
+              },
+              {
+                title: { en: "Terminology", es: "Terminología" },
+                v: {
+                  en: "It suggested “Link” for empty rows. Reviewing it, I saw that inserting your own content was missing, and I changed the approach.",
+                  es: "Propuso “Vincular” para las filas vacías. Al revisarlo, vi que faltaba poder insertar contenido propio, y cambié el planteamiento.",
+                },
+              },
+              {
+                title: { en: "Data", es: "Datos" },
+                v: {
+                  en: "The 6 hours went from looking like a saving to what they really are: the starting time the writers gave.",
+                  es: "Las 6 horas pasaron de parecer un ahorro a quedar como lo que son: el tiempo de partida que dieron los redactores.",
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------------ VALIDACIÓN --- */
+      {
+        id: "validation",
+        label: { en: "Validation", es: "Validación" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "The flow was validated by walking through the prototype; there is no real usage data. The people I interviewed saw how it worked and validated the process, but never used it in production.",
+              es: "El flujo se validó viendo el prototipo; no hay datos de uso real. Las personas entrevistadas vieron el funcionamiento y validaron el proceso, pero no llegaron a usarlo en producción.",
+            },
+          },
+          {
+            t: "boxes",
+            full: true,
+            /* La sección ya lleva su h2: las cajas bajan a h3. */
+            heading: 3,
+            items: [
+              {
+                theme: "soft",
+                label: { en: "Original project", es: "Del proyecto original" },
+                list: [
+                  { en: "Problem and research", es: "Problema y research" },
+                  { en: "Base flow", es: "Flujo base" },
+                  { en: "Logo and icons", es: "Logo e iconos" },
+                  {
+                    en: "Change log, favourites and preview",
+                    es: "Registro de cambios, favoritos y previsualización",
+                  },
+                  {
+                    en: "Dashboard and projects by status (concept)",
+                    es: "Dashboard y proyectos por estado (concepto)",
+                  },
+                ],
+              },
+              {
+                theme: "soft",
+                label: {
+                  en: "2026 update, not validated with users",
+                  es: "Actualización de 2026, sin validar con usuarias",
+                },
+                list: [
+                  { en: "Current interface", es: "Interfaz actual" },
+                  { en: "Removal of UFO", es: "Eliminación de UFO" },
+                  {
+                    en: "+ menu and inserting own content",
+                    es: "Menú + e inserción de contenido propio",
+                  },
+                  {
+                    en: "Sorting by rich content and checks before publishing",
+                    es: "Orden por contenido enriquecido y comprobaciones antes de publicar",
+                  },
+                  {
+                    en: "Reorganised dashboard and board",
+                    es: "Reorganización del dashboard y del tablero",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ------------------------------------------------------ REFLEXIONES -- */
+      {
+        id: "conclusion",
+        label: { en: "Reflections", es: "Reflexiones" },
+        blocks: [
+          {
+            t: "p",
+            v: {
+              en: "The interviews shaped the product more than any screen: favourites, preview and the change log changed because of them. Designing for an internal team meant designing for very specific work, where a filter in the right place saves more than a polished interface.",
+              es: "Las entrevistas marcaron el producto más que cualquier pantalla: favoritos, previsualización y registro de cambios cambiaron gracias a ellas. Diseñar para un equipo interno era diseñar para un trabajo muy concreto, donde un filtro en el sitio adecuado ahorra más que una interfaz pulida.",
+            },
+          },
+          {
+            t: "p",
+            v: {
+              en: "Coming back to it later, the challenge was to improve it without hiding what is new. The next step would be to test the 2026 changes with the people who use it.",
+              es: "Al retomarlo tiempo después, el reto fue mejorarlo sin esconder lo que es nuevo. El siguiente paso sería probar los cambios de 2026 con quienes lo usan.",
             },
           },
         ],
@@ -1587,6 +2225,8 @@ const PROJECTS = [
   /* -------------------------------------------------------------- EDUSPORT */
   {
     id: "edusport",
+    /* Se queda fuera de la home, pero sigue en la página de proyectos. */
+    hideOnHome: true,
     layout: "rich",
     title: "Edusport",
     /* En el original el nombre del proyecto va como titular del hero, en
@@ -1868,6 +2508,8 @@ const PROJECTS = [
     /* Se queda fuera de la home, pero sigue en la página de proyectos. */
     hideOnHome: true,
     title: "Borealis",
+    /* Etiqueta de filtro de la página de proyectos. */
+    tags: [{ key: "article", label: { en: "Article", es: "Artículo" } }],
     category: { en: "Healthcare / UX research", es: "Salud / Investigación UX" },
     tagline: {
       en: "Mental health and habits. A Design Thinking project.",
